@@ -18,7 +18,7 @@ function draw() {
   //Set up scene
   background(255, 255, 255);
   fill(color(150, 150, 150));
-  image(jacket_img, 50, 50, 1200, 500);
+  image(jacket_img, 250, 50, 1000, 500);
 
   k.activate();
   j.activate();
