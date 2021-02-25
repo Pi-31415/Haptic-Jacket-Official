@@ -23,12 +23,19 @@ A basic Electron application needs just these files:
 
 You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
 
-## Commands
+## Development Commands
 
 ```bash
 # Install dependencies
 npm install
 # Run the app
 npm start
+```
+
+## Building Commands
+
+```bash
+# Mac Build
+electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
 ```
 

@@ -1,22 +1,20 @@
 {
-  "name": "electron-quick-start",
+  "name": "Haptic Jacket Controller",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A controller application to control the modules on haptic jacket",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/Pi-31415/Haptic-Jacket-Official",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Haptic",
+    "Jacket"
   ],
-  "author": "GitHub",
+  "author": "Pi Ko",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^11.3.0"
+    "electron": "^11.3.0",
+    "electron-packager": "^15.2.0"
   }
 }
