@@ -43,13 +43,13 @@
     <div class="nav-wrapper">
       <span class="brand-logo">Haptic Jacket Controller</span>
       <ul class="right">
-        <li id="configure_btn"><a class="waves-effect waves-light btn purple lighten-2" 
-            onclick="configure()">Configure Positions<i class="material-icons right">settings</i></a></li>
-
+        <li><a class="waves-effect waves-light btn purple lighten-2" onclick="show_help()">Help<i
+              class="material-icons right">help</i></a></li>
+        <li id="configure_btn"><a class="waves-effect waves-light btn purple lighten-2" onclick="configure()">Configure
+            Positions<i class="material-icons right">settings</i></a></li>
         <li id="config_confirm_btn"><a class="waves-effect waves-light btn green darken-2"
-            onclick="save_configuration()">Confirm Positions<i class="material-icons right">check</i></a></li>
+            onclick="save_configuration()">Save Positions<i class="material-icons right">check</i></a></li>
 
-        
         <li><a class="waves-effect waves-light btn purple lighten-2" onclick="scan_modules()">Scan Nearby Modules<i
               class="material-icons right">search</i></a></li>
       </ul>
@@ -57,7 +57,9 @@
   </nav>
 
 
-
+  <div class="progress" id="progressbar">
+    <div class="indeterminate"></div>
+  </div>
   <main>
 
   </main>
