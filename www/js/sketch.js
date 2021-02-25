@@ -1,7 +1,10 @@
 let jacket_img;
 var configuration_mode_on = false;
-var total_number_of_modules = 60;
+var total_number_of_modules = 12;
 var scan_complete = false;
+
+//Check if storage_file exists
+var configuration_storage_exists = false;
 
 //Motor related variables
 var current_dragged_module = 0;
@@ -38,6 +41,7 @@ function draw() {
   //Other Motors
   if (scan_complete) {
     RenderMotors(total_number_of_modules);
+    
     //Activate Vibration Detection
     for (var l = 1; l < motorGUI.length; l++) {
       motorGUI[l].activate();
@@ -56,17 +60,20 @@ function draw() {
     if (!locked) {
       fill(color(186, 104, 200));
     } else {
-      fill(0, 0, 0);
+      //selection color
+      fill(87, 6, 140);
     }
   } else {
-    fill(255, 255, 255);
+    fill(color(150, 150, 150));
     overBox = false;
   }
 
-  // Draw the dummy
-  ellipse(bx, by, boxSize, boxSize);
-  fill(color(0, 0, 0))
-  text(current_dragged_module, bx - 2, by - 20);
+  if (current_dragged_module != 0 && configuration_mode_on) {
+    // Draw the dummy
+    ellipse(bx, by, boxSize, boxSize);
+    fill(color(0, 0, 0))
+    text(current_dragged_module, bx - 2, by - 20);
+  }
 }
 
 //Configuration Dummy Motor related functions
@@ -90,6 +97,23 @@ function mouseDragged() {
 
 function mouseReleased() {
   locked = false;
+  //Drag and drop code occurs here, first record the dummy module's location and duplicate
+  //Then save into local storage
+  if (configuration_mode_on) {
+    // Check browser support
+    if (typeof (Storage) !== "undefined") {
+      // Store
+      localStorage.setItem(current_dragged_module + "-x", bx);
+      localStorage.setItem(current_dragged_module + "-y", by);
+
+    } else {
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+
+  }
+
+
+
 }
 
 
@@ -105,7 +129,18 @@ function RenderMotors(number_of_motors) {
   for (j = 1; j <= 4; j++) {
     for (k = 1; k <= 20; k++) {
       if (autoID <= number_of_motors) {
+
         motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
+        
+        /*
+        CONFUSING PART
+        if (localStorage.getItem(autoID + "-x") != null) {
+          motorGUI[autoID].move(localStorage.getItem(autoID + "-x"), localStorage.getItem(autoID + "-y"));
+        }
+*/
+
+
+
         currentX += current_separator_X;
         autoID++;
       }
@@ -198,6 +233,8 @@ class VibrationMotor {
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
       current_dragged_module = this.ID;
+      bx = motorGUI[current_dragged_module].init_x;
+      by = motorGUI[current_dragged_module].init_y;
     }
     var delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
     //Stop vibrating the motor after a delay time
