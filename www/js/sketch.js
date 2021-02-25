@@ -1,11 +1,7 @@
 let jacket_img;
-
-//Motor related variables
-let motorDelayTimes = [];
-let currentvibratingID = 0;
-
-
 var configuration_mode_on = false;
+//Motor related variables, for the motor being dragged
+let motorDelayTimes = [];
 
 
 function setup() {
@@ -14,11 +10,8 @@ function setup() {
   createCanvas(1300, 700);
   jacket_img = loadImage('img/jacket.png');
 
-
   k = new VibrationMotor(500, 200, 1);
   j = new VibrationMotor(700, 200, 2);
-
-
 }
 
 function draw() {
@@ -58,7 +51,6 @@ function save_configuration() {
 
 // Vibration Motor Class
 class VibrationMotor {
-
   constructor(X, Y, autoID) {
     this.x = X;
     this.y = Y;
@@ -67,16 +59,16 @@ class VibrationMotor {
     this.diameter = 20;
     this.speed = 2;
     this.intensity = 2;
-    this.sensitivity = 0.5;
+    this.sensitivity = 1;
     this.delay_time = 300;
     this.ID = autoID;
     this.is_vibrating = false;
-    //Drag and drop variables
-    this.being_dragged = false;
+    //Color scheme
+    this.color_vibrating = color(186, 104, 200);
+    this.color_non_vibration = color(150, 150, 150);
   }
 
   activate() {
-
     if (
       mouseX >= this.x - (this.diameter * this.sensitivity) &&
       mouseX <= this.x + (this.diameter * this.sensitivity) &&
@@ -86,45 +78,38 @@ class VibrationMotor {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
+    } else {
     }
-
     var delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
-    //Added Delay
+    //Stop vibrating the motor after a delay time
     if (motorDelayTimes[this.ID] > 0) {
       if (delayed_time > this.delay_time) {
         this.is_vibrating = false;
         delayed_time = this.delay_time;
-
       }
       else {
         this.is_vibrating = true;
       }
     }
-
+    //if configuration mode is off, play vibration animations with delay time
     if (!configuration_mode_on) {
-      //if configuration mode is off, play vibration animations with delay time
+      stroke(0, 0, 0); 
       if (this.is_vibrating) {
         //only vibrate if vibration mode is off
         this.x = this.init_x;
         this.y = this.init_y;
         this.x += random(-this.intensity, this.intensity);
         this.y += random(-this.intensity, this.intensity);
-        fill(color(255, 40, 0));
+        fill(this.color_vibrating);
         ellipse(this.x, this.y, this.diameter, this.diameter);
-        fill(color(150, 150, 150));
+        fill(color(0, 0, 0))
         text(this.ID, this.x - 2, this.y - 20);
       } else {
-        fill(color(150, 150, 150));
+        fill(this.color_non_vibration);
         ellipse(this.x, this.y, this.diameter, this.diameter);
+        fill(color(0, 0, 0))
         text(this.ID, this.x - 2, this.y - 20);
       }
     }
-    else{
-      //if configuration mode is ON, allow drag and drop
-
-    }
-
-
   }
-
 }
