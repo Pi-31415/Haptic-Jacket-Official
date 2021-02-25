@@ -8,6 +8,15 @@ var current_dragged_module = 0;
 let motorDelayTimes = [];
 let motorGUI = [];
 
+//Configuration Motor Dummy
+let bx;
+let by;
+let boxSize = 75;
+let overBox = false;
+let locked = false;
+let xOffset = 0.0;
+let yOffset = 0.0;
+
 
 function setup() {
   //Render initial components
@@ -16,7 +25,9 @@ function setup() {
   document.getElementById("progressbar").style.visibility = "hidden";
   createCanvas(1300, 720);
   jacket_img = loadImage('img/jacket.png');
-
+  //Configuration Motor Dummy
+  bx = width / 2.0;
+  by = height / 2.0;
 }
 
 function draw() {
@@ -24,6 +35,7 @@ function draw() {
   background(255, 255, 255);
   fill(color(150, 150, 150));
   image(jacket_img, 30, 30, 1000, 500);
+  //Other Motors
   if (scan_complete) {
     RenderMotors(total_number_of_modules);
     //Activate Vibration Detection
@@ -31,7 +43,53 @@ function draw() {
       motorGUI[l].activate();
     }
   }
+
+  //Configuration Motor Dummy
+  // Test if the cursor is over the box
+  if (
+    mouseX > bx - boxSize &&
+    mouseX < bx + boxSize &&
+    mouseY > by - boxSize &&
+    mouseY < by + boxSize
+  ) {
+    overBox = true;
+    if (!locked) {
+      stroke(255);
+      fill(244, 122, 158);
+    }
+  } else {
+    stroke(156, 39, 176);
+    fill(244, 122, 158);
+    overBox = false;
+  }
+
+  // Draw the box
+  rect(bx, by, boxSize, boxSize);
 }
+
+//Configuration Dummy Motor related functions
+function mousePressed() {
+  if (overBox) {
+    locked = true;
+    fill(255, 255, 255);
+  } else {
+    locked = false;
+  }
+  xOffset = mouseX - bx;
+  yOffset = mouseY - by;
+}
+
+function mouseDragged() {
+  if (locked) {
+    bx = mouseX - xOffset;
+    by = mouseY - yOffset;
+  }
+}
+
+function mouseReleased() {
+  locked = false;
+}
+
 
 
 //GUI Related Functions
