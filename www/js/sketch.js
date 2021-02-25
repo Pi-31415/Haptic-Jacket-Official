@@ -11,7 +11,7 @@ let motorGUI = [];
 //Configuration Motor Dummy
 let bx;
 let by;
-let boxSize = 75;
+let boxSize = 20;
 let overBox = false;
 let locked = false;
 let xOffset = 0.0;
@@ -54,17 +54,19 @@ function draw() {
   ) {
     overBox = true;
     if (!locked) {
-      stroke(255);
-      fill(244, 122, 158);
+      fill(color(186, 104, 200));
+    } else {
+      fill(0, 0, 0);
     }
   } else {
-    stroke(156, 39, 176);
-    fill(244, 122, 158);
+    fill(255, 255, 255);
     overBox = false;
   }
 
-  // Draw the box
-  rect(bx, by, boxSize, boxSize);
+  // Draw the dummy
+  ellipse(bx, by, boxSize, boxSize);
+  fill(color(0, 0, 0))
+  text(current_dragged_module, bx - 2, by - 20);
 }
 
 //Configuration Dummy Motor related functions
