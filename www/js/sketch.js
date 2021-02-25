@@ -69,6 +69,7 @@ function show_help() {
   });
 }
 function configure() {
+  current_dragged_module = 0;
   M.Toast.dismissAll();
   if (!scan_complete) {
     M.toast({ html: 'Please scan for modules first.', classes: 'rounded' });
@@ -83,9 +84,9 @@ function scan_modules() {
   //Mock progress bar for now
   M.Toast.dismissAll();
   var htmlmessage = 'Scanning';
-    M.toast({ html: htmlmessage, classes: 'rounded' });
+  M.toast({ html: htmlmessage, classes: 'rounded' });
   document.getElementById("progressbar").style.visibility = "visible";
-  window.setTimeout(function(){
+  window.setTimeout(function () {
     scan_complete = true;
     M.Toast.dismissAll();
     document.getElementById("progressbar").style.visibility = "hidden";
@@ -95,6 +96,7 @@ function scan_modules() {
 }
 function save_configuration() {
   M.Toast.dismissAll();
+  current_dragged_module = 0;
   configuration_mode_on = false;
   document.getElementById("config_confirm_btn").style.display = "none";
   document.getElementById("configure_btn").style.display = "initial";
@@ -167,8 +169,13 @@ class VibrationMotor {
         fill(color(0, 0, 0))
         text(this.ID, this.init_x - 2, this.init_y - 20);
       }
-    }else{
-      
+    } else {
+      if (current_dragged_module != this.ID) {
+        fill(this.color_non_vibration);
+        ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
+        fill(color(0, 0, 0))
+        text(this.ID, this.init_x - 2, this.init_y - 20);
+      }
     }
   }
 }
