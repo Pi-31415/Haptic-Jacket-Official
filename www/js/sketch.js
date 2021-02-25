@@ -1,10 +1,10 @@
 let jacket_img;
 var configuration_mode_on = false;
 var total_number_of_modules = 60;
-
 var scan_complete = false;
 
 //Motor related variables
+var current_dragged_module = 0;
 let motorDelayTimes = [];
 let motorGUI = [];
 
@@ -73,8 +73,6 @@ function configure() {
   if (!scan_complete) {
     M.toast({ html: 'Please scan for modules first.', classes: 'rounded' });
   } else {
-
-
     configuration_mode_on = true;
     document.getElementById("config_confirm_btn").style.display = "initial";
     document.getElementById("configure_btn").style.display = "none";
@@ -137,7 +135,7 @@ class VibrationMotor {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
-    } else {
+      current_dragged_module = this.ID;
     }
     var delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
     //Stop vibrating the motor after a delay time
@@ -169,6 +167,8 @@ class VibrationMotor {
         fill(color(0, 0, 0))
         text(this.ID, this.init_x - 2, this.init_y - 20);
       }
+    }else{
+      
     }
   }
 }
