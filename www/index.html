@@ -43,21 +43,27 @@
     <div class="nav-wrapper">
       <span class="brand-logo">Haptic Jacket Controller</span>
       <ul class="right">
-        <li><a class="waves-effect waves-light btn purple lighten-2" onclick="show_help()">Help<i class="material-icons right">help</i></a>
-        </li>
-        <li><a class="waves-effect waves-light btn purple lighten-2" onclick="configure()">Configure<i
-              class="material-icons right">settings</i></a></li>
+        <li id="configure_btn"><a class="waves-effect waves-light btn purple lighten-2" 
+            onclick="configure()">Configure Positions<i class="material-icons right">settings</i></a></li>
+
+        <li id="config_confirm_btn"><a class="waves-effect waves-light btn green darken-2"
+            onclick="save_configuration()">Confirm Positions<i class="material-icons right">check</i></a></li>
+
+        
         <li><a class="waves-effect waves-light btn purple lighten-2" onclick="scan_modules()">Scan Nearby Modules<i
               class="material-icons right">search</i></a></li>
       </ul>
     </div>
   </nav>
 
+
+
   <main>
 
   </main>
   <!--JavaScript at end of body for optimized loading-->
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/fab.js"></script>
   <!-- You can also require other files to run in this process -->
   <script src="../renderer.js"></script>
 </body>
