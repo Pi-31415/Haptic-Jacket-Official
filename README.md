@@ -2,6 +2,11 @@
 
 This is the official repository for the haptic jacket middleware for my research project.
 
+### Related Repositories
+
+- [UDP-Client-Server-Test](https://github.com/Pi-31415/UDP-Client-Server-Test)
+- [Haptic-Jacket-API-GUI](https://github.com/Pi-31415/Haptic-Jacket-API-GUI)
+
 ## Requirements
 
 - **NodeJS**
