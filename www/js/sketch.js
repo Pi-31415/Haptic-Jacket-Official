@@ -14,7 +14,7 @@ function setup() {
   pixelDensity(2.0);
   document.getElementById("config_confirm_btn").style.display = "none";
   document.getElementById("progressbar").style.visibility = "hidden";
-  createCanvas(1300, 700);
+  createCanvas(1300, 720);
   jacket_img = loadImage('img/jacket.png');
 
 }
@@ -38,8 +38,8 @@ function draw() {
 function RenderMotors(number_of_motors) {
   var autoID = 1;
   var j, k;
-  var current_separator_X = 55;
-  var current_separator_Y = 55;
+  var current_separator_X = 50;
+  var current_separator_Y = 50;
   var currentY = 600;
   var currentX = 50;
   for (j = 1; j <= 4; j++) {
@@ -73,6 +73,8 @@ function configure() {
   if (!scan_complete) {
     M.toast({ html: 'Please scan for modules first.', classes: 'rounded' });
   } else {
+
+
     configuration_mode_on = true;
     document.getElementById("config_confirm_btn").style.display = "initial";
     document.getElementById("configure_btn").style.display = "none";
