@@ -1,6 +1,6 @@
 let jacket_img;
 var configuration_mode_on = false;
-var total_number_of_modules = 40;
+var total_number_of_modules = 60;
 
 var scan_complete = false;
 
@@ -38,8 +38,8 @@ function draw() {
 function RenderMotors(number_of_motors) {
   var autoID = 1;
   var j, k;
-  var current_separator_X = 50;
-  var current_separator_Y = 50;
+  var current_separator_X = 55;
+  var current_separator_Y = 55;
   var currentY = 600;
   var currentX = 50;
   for (j = 1; j <= 4; j++) {
