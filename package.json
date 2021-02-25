@@ -1,5 +1,5 @@
 {
-  "name": "Haptic Jacket Controller",
+  "name": "Haptic-Jacket-Controller",
   "version": "1.0.0",
   "description": "A controller application to control the modules on haptic jacket",
   "main": "main.js",
