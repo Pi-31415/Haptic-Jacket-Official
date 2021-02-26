@@ -114,20 +114,9 @@ function mouseReleased() {
       // Store location in localstorage if possible
       localStorage.setItem(current_dragged_module + "-x", bx);
       localStorage.setItem(current_dragged_module + "-y", by);
-      //Prompt save
-      console.log("Saved Location for Motor "+current_dragged_module+" at ("+bx+","+by+")");
+      console.log("Saved Location : Motor "+current_dragged_module+" : ("+localStorage.getItem(current_dragged_module + "-x")+","+localStorage.getItem(current_dragged_module + "-y")+")");
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-    }
-  }
-}
-
-//List all configurations
-function list_configuration(){
-  for (var l = 1; l < motorGUI.length; l++) {
-
-    if(localStorage.getItem(l + "-x") != null && localStorage.getItem(l + "-y") != null){
-      console.log("Motor "+l+" : ("+localStorage.getItem(l + "-x")+","+localStorage.getItem(l + "-y")+")");
     }
   }
 }
@@ -137,26 +126,40 @@ function list_configuration(){
 function RenderMotors(number_of_motors) {
   var autoID = 1;
   var j, k;
-  var current_separator_X = 50;
+  var current_separator_X = 30;
   var current_separator_Y = 50;
   var currentY = 600;
   var currentX = 50;
 
-  //Render the motors in a rectangular array if configuration does not exist
-  for (j = 1; j <= 4; j++) {
-    for (k = 1; k <= 20; k++) {
-      if (autoID <= number_of_motors) {
-
-
-        motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
-
-        currentX += current_separator_X;
-        autoID++;
+  if (configuration_storage_exists) {
+    //If previous configuration exists, render the motors in the stored positions
+    for (j = 1; j <= 4; j++) {
+      for (k = 1; k <= 20; k++) {
+        if (autoID <= number_of_motors) {
+          motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
+          currentX += current_separator_X;
+          autoID++;
+        }
       }
+      currentX = 50;
+      currentY += current_separator_Y;
     }
-    currentX = 50;
-    currentY += current_separator_Y;
+
+  } else {
+    //Render the motors in a rectangular array if configuration does not exist
+    for (j = 1; j <= 4; j++) {
+      for (k = 1; k <= 20; k++) {
+        if (autoID <= number_of_motors) {
+          motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
+          currentX += current_separator_X;
+          autoID++;
+        }
+      }
+      currentX = 50;
+      currentY += current_separator_Y;
+    }
   }
+
 }
 
 function show_help() {
@@ -209,6 +212,15 @@ function save_configuration() {
   M.toast({ html: 'Your configurations are saved.', classes: 'rounded' });
 }
 
+//List all configurations
+function list_configuration(){
+  for (var l = 1; l <= total_number_of_modules; l++) {
+    if(localStorage.getItem(l + "-x") != null && localStorage.getItem(l + "-y") != null){
+      console.log("Motor "+l+" : ("+localStorage.getItem(l + "-x")+","+localStorage.getItem(l + "-y")+")");
+    }
+  }
+}
+
 // Vibration Motor Class
 class VibrationMotor {
   constructor(X, Y, autoID) {
@@ -241,9 +253,11 @@ class VibrationMotor {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
-      current_dragged_module = this.ID;
-      bx = motorGUI[current_dragged_module].init_x;
-      by = motorGUI[current_dragged_module].init_y;
+      if (!locked) {
+        current_dragged_module = this.ID;
+        bx = motorGUI[current_dragged_module].init_x;
+        by = motorGUI[current_dragged_module].init_y;
+      }
     }
     var delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
     //Stop vibrating the motor after a delay time
@@ -275,15 +289,6 @@ class VibrationMotor {
         fill(color(0, 0, 0))
         text(this.ID, this.init_x - 2, this.init_y - 20);
       }
-    }else{
-      if(this.ID != current_dragged_module){
-        fill(this.color_non_vibration);
-        ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
-        fill(color(0, 0, 0))
-        text(this.ID, this.init_x - 2, this.init_y - 20);
-      }
-      
     }
-
   }
 }
