@@ -7,7 +7,7 @@
 
 let jacket_img;
 var configuration_mode_on = false;
-var total_number_of_modules = 12;
+var total_number_of_modules = 50;
 var scan_complete = false;
 
 //Check if storage_file exists
@@ -35,11 +35,6 @@ function setup() {
   document.getElementById("progressbar").style.visibility = "hidden";
   createCanvas(1300, 720);
   jacket_img = loadImage('img/jacket.png');
-
-  //Check if localstorage exists
-  if (localStorage.getItem("1-x") != null) {
-    configuration_storage_exists = true;
-  }
 }
 
 function draw() {
@@ -47,10 +42,15 @@ function draw() {
   background(255, 255, 255);
   fill(color(150, 150, 150));
   image(jacket_img, 30, 30, 1000, 500);
-  //Other Motors
+
+  //Check if localstorage exists
+  if (localStorage.getItem("1-x") != null) {
+    configuration_storage_exists = true;
+  }
+
+  //Render Other Motors
   if (scan_complete) {
     RenderMotors(total_number_of_modules);
-
     //Activate Vibration Detection
     for (var l = 1; l < motorGUI.length; l++) {
       motorGUI[l].activate();
@@ -114,8 +114,20 @@ function mouseReleased() {
       // Store location in localstorage if possible
       localStorage.setItem(current_dragged_module + "-x", bx);
       localStorage.setItem(current_dragged_module + "-y", by);
+      //Prompt save
+      console.log("Saved Location for Motor "+current_dragged_module+" at ("+bx+","+by+")");
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+  }
+}
+
+//List all configurations
+function list_configuration(){
+  for (var l = 1; l < motorGUI.length; l++) {
+
+    if(localStorage.getItem(l + "-x") != null && localStorage.getItem(l + "-y") != null){
+      console.log("Motor "+l+" : ("+localStorage.getItem(l + "-x")+","+localStorage.getItem(l + "-y")+")");
     }
   }
 }
@@ -129,10 +141,15 @@ function RenderMotors(number_of_motors) {
   var current_separator_Y = 50;
   var currentY = 600;
   var currentX = 50;
+
+  //Render the motors in a rectangular array if configuration does not exist
   for (j = 1; j <= 4; j++) {
     for (k = 1; k <= 20; k++) {
       if (autoID <= number_of_motors) {
+
+
         motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
+
         currentX += current_separator_X;
         autoID++;
       }
@@ -258,6 +275,15 @@ class VibrationMotor {
         fill(color(0, 0, 0))
         text(this.ID, this.init_x - 2, this.init_y - 20);
       }
+    }else{
+      if(this.ID != current_dragged_module){
+        fill(this.color_non_vibration);
+        ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
+        fill(color(0, 0, 0))
+        text(this.ID, this.init_x - 2, this.init_y - 20);
+      }
+      
     }
+
   }
 }
