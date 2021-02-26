@@ -47,8 +47,18 @@
               class="material-icons right">help</i></a></li>
         <li id="configure_btn"><a class="waves-effect waves-light btn purple lighten-2" onclick="configure()">Configure
             Positions<i class="material-icons right">settings</i></a></li>
-        <li id="config_confirm_btn"><a class="waves-effect waves-light btn green darken-2"
-            onclick="save_configuration()">Save Positions<i class="material-icons right">check</i></a></li>
+        <div id="config_confirm_btn">
+          <li>
+            <a class="waves-effect waves-light btn green darken-2" onclick="save_configuration()">Save Positions<i
+                class="material-icons right">check</i></a>
+          </li>
+          <li>
+            <a class="waves-effect waves-light btn red darken-1" onclick="clear_configuration()">Reset All<i
+                class="material-icons right">clear</i></a>
+          </li>
+
+        </div>
+        
 
         <li><a class="waves-effect waves-light btn purple lighten-2" onclick="scan_modules()">Scan Nearby Modules<i
               class="material-icons right">search</i></a></li>

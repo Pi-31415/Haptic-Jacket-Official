@@ -7,9 +7,11 @@
 
 let jacket_img;
 var configuration_mode_on = false;
-var total_number_of_modules = 50;
-var scan_complete = false;
 
+var total_number_of_modules = 60;
+
+var scan_complete = false;
+let screen_width = 1300;
 //Check if storage_file exists
 var configuration_storage_exists = false;
 
@@ -17,7 +19,7 @@ var configuration_storage_exists = false;
 var current_dragged_module = 0;
 let motorDelayTimes = [];
 let motorGUI = [];
-
+let IP = [];
 //Configuration Motor Dummy
 let bx;
 let by;
@@ -29,19 +31,32 @@ let yOffset = 0.0;
 
 
 function setup() {
+
+  //Scan a random number of modules
+  //Maximum support is 60, but IP can only handle 28 on screen.
+
+  total_number_of_modules = floor(random(0, 28));
+
+
   //Render initial components
   pixelDensity(2.0);
   document.getElementById("config_confirm_btn").style.display = "none";
   document.getElementById("progressbar").style.visibility = "hidden";
-  createCanvas(1300, 720);
+  createCanvas(screen_width, 720);
   jacket_img = loadImage('img/jacket.png');
+
+  //Generate IP initially
+  for (var l = 1; l <= total_number_of_modules; l++) {
+    IP[l] = generate_IP();
+  }
+
 }
 
 function draw() {
   //Set up scene
   background(255, 255, 255);
   fill(color(150, 150, 150));
-  image(jacket_img, 30, 30, 1000, 500);
+  image(jacket_img, 30, 20, 1000, 500);
 
   //Check if localstorage exists
   if (localStorage.getItem("1-x") != null) {
@@ -55,6 +70,7 @@ function draw() {
     for (var l = 1; l < motorGUI.length; l++) {
       motorGUI[l].activate();
     }
+    show_IP();
   }
 
   //Configuration Motor Dummy
@@ -67,9 +83,10 @@ function draw() {
   ) {
     overBox = true;
     if (!locked) {
+      //if not locked, display purple on dummy
       fill(color(186, 104, 200));
     } else {
-      //selection color
+      //selection color on dummy - dark purple
       fill(87, 6, 140);
     }
   } else {
@@ -111,15 +128,15 @@ function mouseReleased() {
     // Check browser support
     if (typeof (Storage) !== "undefined") {
       // Store location in localstorage if possible
-      localStorage.setItem(current_dragged_module + "-x", bx);
-      localStorage.setItem(current_dragged_module + "-y", by);
+      localStorage.setItem(current_dragged_module + "-x", parseFloat(bx));
+      localStorage.setItem(current_dragged_module + "-y", parseFloat(by));
       console.log("Saved Location : Motor " + current_dragged_module + " : (" + localStorage.getItem(current_dragged_module + "-x") + "," + localStorage.getItem(current_dragged_module + "-y") + ")");
       current_dragged_module = 0;
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
   }
-  
+
   locked = false;
 }
 
@@ -133,41 +150,25 @@ function RenderMotors(number_of_motors) {
   var currentY = 600;
   var currentX = 50;
 
-  if (configuration_storage_exists) {
-    //If previous configuration exists, render the motors in the stored positions
-    for (j = 1; j <= 4; j++) {
-      for (k = 1; k <= 20; k++) {
-        if (autoID <= number_of_motors) {
+  noFill();
+  stroke(127, 63, 120);
+  rect(20, 560, 1020, 160);
+
+  //Render the motors in a rectangular array if configuration does not exist
+  for (j = 1; j <= 4; j++) {
+    for (k = 1; k <= 20; k++) {
+      if (autoID <= number_of_motors) {
+        if (localStorage.getItem(autoID + "-x")) {
+          motorGUI[autoID] = new VibrationMotor(parseFloat(localStorage.getItem(autoID + "-x")), parseFloat(localStorage.getItem(autoID + "-y")), autoID);
+        } else {
           motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
-          currentX += current_separator_X;
-          autoID++;
         }
+        currentX += current_separator_X;
+        autoID++;
       }
-      currentX = 50;
-      currentY += current_separator_Y;
     }
-
-  } else {
-    //Render the motors in a rectangular array if configuration does not exist
-    for (j = 1; j <= 4; j++) {
-      for (k = 1; k <= 20; k++) {
-        if (autoID <= number_of_motors) {
-
-
-          if(localStorage.getItem(autoID + "-x")){
-            motorGUI[autoID] = new VibrationMotor(localStorage.getItem(autoID + "-x"), localStorage.getItem(autoID + "-y"), autoID);
-          }else{
-            motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
-          }
-          
-
-          currentX += current_separator_X;
-          autoID++;
-        }
-      }
-      currentX = 50;
-      currentY += current_separator_Y;
-    }
+    currentX = 50;
+    currentY += current_separator_Y;
   }
 
 }
@@ -198,21 +199,6 @@ function configure() {
   }
 }
 
-function scan_modules() {
-  //Mock progress bar for now
-  M.Toast.dismissAll();
-  var htmlmessage = 'Scanning';
-  M.toast({ html: htmlmessage, classes: 'rounded' });
-  document.getElementById("progressbar").style.visibility = "visible";
-  window.setTimeout(function () {
-    scan_complete = true;
-    M.Toast.dismissAll();
-    document.getElementById("progressbar").style.visibility = "hidden";
-    htmlmessage = total_number_of_modules + ' modules found.';
-    M.toast({ html: htmlmessage, classes: 'rounded' });
-  }, 2500);
-}
-
 function save_configuration() {
   M.Toast.dismissAll();
   current_dragged_module = 0;
@@ -233,8 +219,9 @@ function list_configuration() {
 
 //Clear all configurations
 function clear_configuration() {
+  current_dragged_module = 0;
   localStorage.clear();
-  console.log("All configurations cleared");
+  M.toast({ html: 'All configuration data cleared.', classes: 'rounded' });
 }
 
 // Vibration Motor Class
@@ -269,11 +256,15 @@ class VibrationMotor {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
+
+      console.log('current drag ID: ' + current_dragged_module);
+
       if (!locked && configuration_mode_on) {
         current_dragged_module = this.ID;
         bx = motorGUI[current_dragged_module].init_x;
         by = motorGUI[current_dragged_module].init_y;
       }
+
     }
     var delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
     //Stop vibrating the motor after a delay time
@@ -290,7 +281,7 @@ class VibrationMotor {
     if (!configuration_mode_on) {
       stroke(0, 0, 0);
       if (this.is_vibrating) {
-        //only vibrate if vibration mode is off
+        //only vibrate if configuration mode mode is off
         this.x = this.init_x;
         this.y = this.init_y;
         this.x += random(-this.intensity, this.intensity);
@@ -305,13 +296,42 @@ class VibrationMotor {
         fill(color(0, 0, 0))
         text(this.ID, this.init_x - 2, this.init_y - 20);
       }
-    }else{
-      if(this.ID != current_dragged_module){
+
+    } else {
+      if (this.ID != current_dragged_module) {
         fill(this.color_non_vibration);
         ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
         fill(color(0, 0, 0))
         text(this.ID, this.init_x - 2, this.init_y - 20);
       }
     }
+  }
+}
+
+
+function scan_modules() {
+  //Mock progress bar for now
+  M.Toast.dismissAll();
+  var htmlmessage = 'Scanning';
+  M.toast({ html: htmlmessage, classes: 'rounded' });
+  document.getElementById("progressbar").style.visibility = "visible";
+  window.setTimeout(function () {
+    scan_complete = true;
+    M.Toast.dismissAll();
+    document.getElementById("progressbar").style.visibility = "hidden";
+    htmlmessage = total_number_of_modules + ' modules found.';
+    M.toast({ html: htmlmessage, classes: 'rounded' });
+  }, 500);
+}
+
+//Mock IP Generator
+function generate_IP() {
+  return floor(random(0, 255)) + '.' + floor(random(0, 255)) + '.' + floor(random(0, 255)) + '.' + floor(random(0, 255));
+}
+
+function show_IP() {
+  text('Modules and Associated IP', 1060, 15);
+  for (var l = 1; l < motorGUI.length; l++) {
+    text(l + ' - ' + IP[l], 1060, 10 + (25 * l));
   }
 }
