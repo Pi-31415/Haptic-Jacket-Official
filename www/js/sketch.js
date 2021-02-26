@@ -35,7 +35,7 @@ function setup() {
   //Scan a random number of modules
   //Maximum support is 60, but IP can only handle 28 on screen.
 
-  total_number_of_modules = floor(random(0, 28));
+  total_number_of_modules = floor(random(10, 28));
 
 
   //Render initial components
