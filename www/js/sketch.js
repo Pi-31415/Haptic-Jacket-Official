@@ -114,11 +114,12 @@ function mouseReleased() {
       localStorage.setItem(current_dragged_module + "-x", bx);
       localStorage.setItem(current_dragged_module + "-y", by);
       console.log("Saved Location : Motor " + current_dragged_module + " : (" + localStorage.getItem(current_dragged_module + "-x") + "," + localStorage.getItem(current_dragged_module + "-y") + ")");
+      current_dragged_module = 0;
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
   }
-
+  
   locked = false;
 }
 
@@ -151,7 +152,15 @@ function RenderMotors(number_of_motors) {
     for (j = 1; j <= 4; j++) {
       for (k = 1; k <= 20; k++) {
         if (autoID <= number_of_motors) {
-          motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
+
+
+          if(localStorage.getItem(autoID + "-x")){
+            motorGUI[autoID] = new VibrationMotor(localStorage.getItem(autoID + "-x"), localStorage.getItem(autoID + "-y"), autoID);
+          }else{
+            motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
+          }
+          
+
           currentX += current_separator_X;
           autoID++;
         }
@@ -260,7 +269,7 @@ class VibrationMotor {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
-      if (!locked) {
+      if (!locked && configuration_mode_on) {
         current_dragged_module = this.ID;
         bx = motorGUI[current_dragged_module].init_x;
         by = motorGUI[current_dragged_module].init_y;
@@ -291,6 +300,13 @@ class VibrationMotor {
         fill(color(0, 0, 0))
         text(this.ID, this.x - 2, this.y - 20);
       } else {
+        fill(this.color_non_vibration);
+        ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
+        fill(color(0, 0, 0))
+        text(this.ID, this.init_x - 2, this.init_y - 20);
+      }
+    }else{
+      if(this.ID != current_dragged_module){
         fill(this.color_non_vibration);
         ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
         fill(color(0, 0, 0))
