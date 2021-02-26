@@ -41,7 +41,7 @@ function draw() {
   //Other Motors
   if (scan_complete) {
     RenderMotors(total_number_of_modules);
-    
+
     //Activate Vibration Detection
     for (var l = 1; l < motorGUI.length; l++) {
       motorGUI[l].activate();
@@ -102,20 +102,14 @@ function mouseReleased() {
   if (configuration_mode_on) {
     // Check browser support
     if (typeof (Storage) !== "undefined") {
-      // Store
+      // Store location in localstorage if possible
       localStorage.setItem(current_dragged_module + "-x", bx);
       localStorage.setItem(current_dragged_module + "-y", by);
-
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
-
   }
-
-
-
 }
-
 
 
 //GUI Related Functions
@@ -129,18 +123,7 @@ function RenderMotors(number_of_motors) {
   for (j = 1; j <= 4; j++) {
     for (k = 1; k <= 20; k++) {
       if (autoID <= number_of_motors) {
-
-        motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
-        
-        /*
-        CONFUSING PART
-        if (localStorage.getItem(autoID + "-x") != null) {
-          motorGUI[autoID].move(localStorage.getItem(autoID + "-x"), localStorage.getItem(autoID + "-y"));
-        }
-*/
-
-
-
+        motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);  
         currentX += current_separator_X;
         autoID++;
       }
@@ -149,7 +132,6 @@ function RenderMotors(number_of_motors) {
     currentY += current_separator_Y;
   }
 }
-
 
 function show_help() {
   M.Toast.dismissAll();
@@ -163,6 +145,7 @@ function show_help() {
     }
   });
 }
+
 function configure() {
   current_dragged_module = 0;
   M.Toast.dismissAll();
@@ -175,6 +158,7 @@ function configure() {
     M.toast({ html: 'Drag and drop the modules onto the jacket. <br> Save when done.', classes: 'rounded' });
   }
 }
+
 function scan_modules() {
   //Mock progress bar for now
   M.Toast.dismissAll();
@@ -189,6 +173,7 @@ function scan_modules() {
     M.toast({ html: htmlmessage, classes: 'rounded' });
   }, 2500);
 }
+
 function save_configuration() {
   M.Toast.dismissAll();
   current_dragged_module = 0;
@@ -197,8 +182,6 @@ function save_configuration() {
   document.getElementById("configure_btn").style.display = "initial";
   M.toast({ html: 'Your configurations are saved.', classes: 'rounded' });
 }
-
-
 
 // Vibration Motor Class
 class VibrationMotor {
