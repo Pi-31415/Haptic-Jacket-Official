@@ -105,10 +105,9 @@ function mouseDragged() {
 }
 
 function mouseReleased() {
-  locked = false;
   //Drag and drop code occurs here, first record the dummy module's location and duplicate
   //Then save into local storage
-  if (configuration_mode_on) {
+  if (configuration_mode_on && locked) {
     // Check browser support
     if (typeof (Storage) !== "undefined") {
       // Store location in localstorage if possible
@@ -119,6 +118,8 @@ function mouseReleased() {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
   }
+
+  locked = false;
 }
 
 
@@ -126,7 +127,7 @@ function mouseReleased() {
 function RenderMotors(number_of_motors) {
   var autoID = 1;
   var j, k;
-  var current_separator_X = 30;
+  var current_separator_X = 50;
   var current_separator_Y = 50;
   var currentY = 600;
   var currentX = 50;
