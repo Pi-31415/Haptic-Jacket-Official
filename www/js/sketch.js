@@ -113,7 +113,7 @@ function mouseReleased() {
       // Store location in localstorage if possible
       localStorage.setItem(current_dragged_module + "-x", bx);
       localStorage.setItem(current_dragged_module + "-y", by);
-      console.log("Saved Location : Motor "+current_dragged_module+" : ("+localStorage.getItem(current_dragged_module + "-x")+","+localStorage.getItem(current_dragged_module + "-y")+")");
+      console.log("Saved Location : Motor " + current_dragged_module + " : (" + localStorage.getItem(current_dragged_module + "-x") + "," + localStorage.getItem(current_dragged_module + "-y") + ")");
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
@@ -214,12 +214,18 @@ function save_configuration() {
 }
 
 //List all configurations
-function list_configuration(){
+function list_configuration() {
   for (var l = 1; l <= total_number_of_modules; l++) {
-    if(localStorage.getItem(l + "-x") != null && localStorage.getItem(l + "-y") != null){
-      console.log("Motor "+l+" : ("+localStorage.getItem(l + "-x")+","+localStorage.getItem(l + "-y")+")");
+    if (localStorage.getItem(l + "-x") != null || localStorage.getItem(l + "-y") != null) {
+      console.log("Motor " + l + " : (" + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + ")");
     }
   }
+}
+
+//Clear all configurations
+function clear_configuration() {
+  localStorage.clear();
+  console.log("All configurations cleared");
 }
 
 // Vibration Motor Class
