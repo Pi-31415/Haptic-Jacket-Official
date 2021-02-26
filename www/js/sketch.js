@@ -1,3 +1,10 @@
+/*-------------------------------------------------*/
+/* Author : Pi */
+/* Date: Feb 26, 2021. */
+/* Description:  This is the GUI visualization for the Haptic Jacket controller middleware */
+/* Dependencies : node, materialize and p5.js*/
+/*-------------------------------------------------*/
+
 let jacket_img;
 var configuration_mode_on = false;
 var total_number_of_modules = 12;
