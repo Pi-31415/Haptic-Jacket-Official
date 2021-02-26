@@ -35,9 +35,6 @@ function setup() {
   document.getElementById("progressbar").style.visibility = "hidden";
   createCanvas(1300, 720);
   jacket_img = loadImage('img/jacket.png');
-  //Configuration Motor Dummy
-  bx = width / 2.0;
-  by = height / 2.0;
 }
 
 function draw() {
@@ -130,7 +127,7 @@ function RenderMotors(number_of_motors) {
   for (j = 1; j <= 4; j++) {
     for (k = 1; k <= 20; k++) {
       if (autoID <= number_of_motors) {
-        motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);  
+        motorGUI[autoID] = new VibrationMotor(currentX, currentY, autoID);
         currentX += current_separator_X;
         autoID++;
       }
@@ -251,13 +248,6 @@ class VibrationMotor {
         fill(color(0, 0, 0))
         text(this.ID, this.x - 2, this.y - 20);
       } else {
-        fill(this.color_non_vibration);
-        ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
-        fill(color(0, 0, 0))
-        text(this.ID, this.init_x - 2, this.init_y - 20);
-      }
-    } else {
-      if (current_dragged_module != this.ID) {
         fill(this.color_non_vibration);
         ellipse(this.init_x, this.init_y, this.diameter, this.diameter);
         fill(color(0, 0, 0))
