@@ -35,6 +35,11 @@ function setup() {
   document.getElementById("progressbar").style.visibility = "hidden";
   createCanvas(1300, 720);
   jacket_img = loadImage('img/jacket.png');
+
+  //Check if localstorage exists
+  if (localStorage.getItem("1-x") != null) {
+    configuration_storage_exists = true;
+  }
 }
 
 function draw() {
