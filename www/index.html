@@ -1,83 +1,191 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP 
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-  -->
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-  <link type="text/css" rel="stylesheet" href="css/app.css" media="screen,projection" />
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Haptic Jacket Controller</title>
-  <!--Favicon-->
-  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="manifest" href="favicon/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <!--p5.js add-->
-  <script src="./js/p5.min.js"></script>
-  <script src="./js/sketch.js"></script>
-</head>
+    <meta charset="utf-8">
+    <!--Social Media related tags-->
 
+    <meta property="og:title" content="Flat UI Scaffolding">
+    <meta property="og:description" content=" For a nice minimalist web app">
+    <meta property="og:image" content="social_image.jpg">
+    <meta property="og:url" content="https://yoursite.com/">
+
+    <meta name="twitter:title" content="Flat UI Scaffolding ">
+    <meta name="twitter:description" content=" For a nice minimalist web app">
+    <meta name="twitter:image" content="social_image.jpg">
+    <meta name="twitter:card" content="social_image.jpg">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flat UI Pro</title>
+    <!-- Loading Bootstrap -->
+    <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui-pro.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <!--Import Material Icons -->
+    <link type="text/css" rel="stylesheet" href="css/material_icons.css" media="screen,projection" />
+    <title>Haptic Jacket Controller</title>
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
 
 <body>
 
-  <nav>
-    <div class="nav-wrapper">
-      <span class="brand-logo">Haptic Jacket Controller</span>
-      <ul class="right">
-        <li><a class="waves-effect waves-light btn purple lighten-2" onclick="show_help()">Help<i
-              class="material-icons right">help</i></a></li>
-        <li id="configure_btn"><a class="waves-effect waves-light btn purple lighten-2" onclick="configure()">Configure
-            Positions<i class="material-icons right">settings</i></a></li>
-        <div id="config_confirm_btn">
-          <li>
-            <a class="waves-effect waves-light btn green darken-2" onclick="save_configuration()">Save Positions<i
-                class="material-icons right">check</i></a>
-          </li>
-          <li>
-            <a class="waves-effect waves-light btn red darken-1" onclick="clear_configuration()">Reset All<i
-                class="material-icons right">clear</i></a>
-          </li>
 
-        </div>
-        
+    <nav class="navbar navbar-inverse navbar-embossed navbar-expand-lg navbar-lg" role="navigation">
+        <a class="navbar-brand" href="#">Flat UI</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-04">
+        </button>
 
-        <li><a class="waves-effect waves-light btn purple lighten-2" onclick="scan_modules()">Scan Nearby Modules<i
-              class="material-icons right">search</i></a></li>
-      </ul>
+        <div class="collapse navbar-collapse justify-content-between" id="navbar-collapse-04">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Messages<span class="navbar-unread">1</span></a></li>
+                <li class="active"><a href="#">About Us</a></li>
+                <li><a href="#">Clients</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">MonsterCritic</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="d-lg-none">Settings<span class="fui-gear"></span></span>
+                        <span class="d-none d-lg-block"><span class="fui-gear"></span></span>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
+
+
+    <!--Main Content Begins-->
+
+    <div class="container ptl contents-ui">
+        <div class="demo-row typography-row">
+            <div class="demo-title">
+                <h3 class="demo-panel-title">Typography</h3>
+            </div>
+            <div class="demo-content">
+                <div class="demo-type-example">
+                    <h1><span class="demo-heading-note">Header 1</span>Showers across the</h1>
+                </div>
+                <div class="demo-type-example">
+                    <h2><span class="demo-heading-note">Header 2</span>Give this quartet a few</h2>
+                </div>
+                <div class="demo-type-example">
+                    <h3><span class="demo-heading-note">Header 3</span>The Vatican transitions to a</h3>
+                </div>
+                <div class="demo-type-example">
+                    <h4><span class="demo-heading-note">Header 4</span>Great American Bites: Telluride's Oak, The</h4>
+                </div>
+                <div class="demo-type-example">
+                    <h5><span class="demo-heading-note">Header 5</span>Author Diane Alberts loves her some good</h5>
+                </div>
+                <div class="demo-type-example">
+                    <h6><span class="demo-heading-note">Header 6</span>With the success of young-adult book-to-movie
+                    </h6>
+                </div>
+                <div class="demo-type-example">
+                    <span class="demo-text-note">Paragraph</span>
+                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                        <strong>Donec ullamcorper</strong> nulla non metus auctor fringilla. Duis mollis, est non
+                        commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                </div>
+                <div class="demo-type-example">
+                    <span class="demo-text-note">Image</span>
+                    <img src="images/exaple-image.jpg" alt="exaple-image" class="img-rounded img-responsive">
+                    <p class="img-comment"><strong>Note:</strong> gravida at eget metus. Duis mollis, est non commodo
+                        luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                </div>
+                <div class="demo-type-example">
+                    <span class="demo-text-note">Lead Text</span>
+                    <p class="lead">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus.</p>
+                </div>
+                <div class="demo-type-example">
+                    <span class="demo-text-note">Quote</span>
+                    <blockquote>
+                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+                            ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus.</p>
+                        <small>Steve Jobs, CEO Apple</small>
+                    </blockquote>
+                </div>
+                <div class="demo-type-example">
+                    <span class="demo-text-note">Small Font</span>
+                    <p><small>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                            Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus,
+                            nisi erat porttitor ligula, eget lacinia odio sem nec elit.</small></p>
+                </div>
+            </div><!-- /.demo-content-wide -->
+        </div><!-- /.demo-row -->
+
+    </div><!-- /.container -->
+    <!--Main Content Ends-->
+
+    <!--Footer-->
+    <div class="mtl pbl">
+        <div class="bottom-menu bottom-menu-inverse">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <a href="#fakelink" class="bottom-menu-brand">Flat UI</a>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <ul class="bottom-menu-list">
+                            <li><a href="#fakelink">About Us</a></li>
+                            <li><a href="#fakelink">Store</a></li>
+                            <li class="active"><a href="#fakelink">Jobs</a></li>
+                            <li><a href="#fakelink">Privacy</a></li>
+                            <li><a href="#fakelink">Terms</a></li>
+                            <li><a href="#fakelink">Follow Us</a></li>
+                            <li><a href="#fakelink">Support</a></li>
+                            <li><a href="#fakelink">Links</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <ul class="bottom-menu-iconic-list">
+                            <li><a href="#fakelink" class="fui-pinterest"></a></li>
+                            <li><a href="#fakelink" class="fui-facebook"></a></li>
+                            <li><a href="#fakelink" class="fui-twitter"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /bottom-menu-inverse -->
     </div>
-  </nav>
 
 
-  <div class="progress" id="progressbar">
-    <div class="indeterminate"></div>
-  </div>
-  <main>
-
-  </main>
-  <!--JavaScript at end of body for optimized loading-->
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/fab.js"></script>
-  <!-- You can also require other files to run in this process -->
-  <script src="../renderer.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap 4 requires Popper.js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/video.js"></script>
+    <script src="scripts/flat-ui-pro.js"></script>
+    <script src="scripts/application.js"></script>
 </body>
 
 </html>

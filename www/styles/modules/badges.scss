@@ -1,0 +1,100 @@
+
+//
+// Badges
+// --------------------------------------------------
+
+.badge {
+  font-size: 76%;
+  font-weight: normal;
+  line-height: 1.15;
+  padding: .25em .6em .29em;
+  border-radius: .25em;
+
+  // Add hover effects, but only for links
+  @at-root a#{&} {
+    &:hover,
+    &:focus {
+      color: $badge-link-hover-color;
+    }
+  }
+  // Quick fix for badges in buttons
+  .btn & {
+    position: relative;
+    top: -1px;
+  }
+  [class*="fui-"] {
+    &:before {
+      position: relative;;
+      top: 2px;
+      font-size: 16px;
+    }
+  }
+}
+
+// Colors
+// Contextual variations (linked badges get darker on :hover)
+
+.badge-default {
+  @include badge-variant($badge-default-bg, $badge-default-bg-hover, $badge-default-text-color);
+}
+
+.badge-inverse {
+  @include badge-variant($badge-inverse-bg, $badge-inverse-bg-hover);
+}
+
+.badge-success {
+  @include badge-variant($badge-success-bg, $badge-success-bg-hover);
+}
+
+.badge-important {
+  @include badge-variant($badge-important-bg, $badge-important-bg-hover);
+}
+
+.badge-warning {
+  @include badge-variant($badge-warning-bg, $badge-warning-bg-hover);
+}
+
+.badge-info {
+  @include badge-variant($badge-info-bg, $badge-info-bg-hover);
+}
+
+.badge-primary {
+  @include badge-variant($badge-primary-bg, $badge-primary-bg-hover);
+}
+
+
+//
+// Badges
+// --------------------------------------------------
+
+// Base class
+.badge-light {
+  font-size: floor(($component-font-size-base * 0.867)); // ~13px
+  font-weight: $badge-font-weight;
+  color: $badge-color;
+  line-height: $badge-line-height;
+  background-color: $badge-bg;
+  border-radius: $badge-border-radius;
+  padding: 0 8px;
+
+  // Quick fix for badges in buttons
+  .btn & {
+    position: relative;
+    top: -1px;
+  }
+
+  // Hover state, but only for links
+  @at-root a#{&} {
+    &:hover,
+    &:focus {
+      color: $badge-link-hover-color;
+    }
+  }
+
+  // Account for counters in navs
+  a.list-group-item > &,
+  .nav-pills > li > a > & {
+    color: $badge-active-color;
+    background-color: $badge-active-bg;
+  }
+}
