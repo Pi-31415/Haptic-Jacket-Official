@@ -29,9 +29,14 @@ let locked = false;
 let xOffset = 0.0;
 let yOffset = 0.0;
 
+var myFont;
+
+function preload(){
+  myFont = loadFont("./fonts/lato/lato-light.ttf");
+}
 
 function setup() {
-
+  textFont(myFont);
   //Scan a random number of modules
   //Maximum support is 60, but IP can only handle 28 on screen.
 
@@ -39,11 +44,11 @@ function setup() {
 
 
   //Render initial components
-  pixelDensity(2.0);
+  pixelDensity(3.0);
   
 
   createCanvas(screen_width, 690);
-  jacket_img = loadImage('img/jacket.png');
+  jacket_img = loadImage('img/jacket.svg');
 
   //Generate IP initially
   for (var l = 1; l <= total_number_of_modules; l++) {
@@ -54,9 +59,9 @@ function setup() {
 
 function draw() {
   //Set up scene
-  background(255, 255, 255);
+  background(255,255,255);
   fill(color(150, 150, 150));
-  image(jacket_img, 30, 20, 1000, 500);
+  image(jacket_img, 20, 20, 1000, 580);
 
   //Check if localstorage exists
   if (localStorage.getItem("1-x") != null) {
@@ -103,7 +108,7 @@ function draw() {
 }
 
 function show_message(msg){
-  document.getElementById("messagebox").innerHTML = msg;
+  document.getElementById("messagebox").innerHTML = "<i style='font-weight:normal'>"+ msg + "</i>";
 }
 
 //Configuration Dummy Motor related functions
@@ -178,18 +183,17 @@ function RenderMotors(number_of_motors) {
 }
 
 function show_help() {
-  alert("Show Tutorial");
+  show_message("Show Tutorial");
 }
 
 function configure() {
   current_dragged_module = 0;
   
   if (!scan_complete) {
-    alert('Please scan for modules first.');
+    show_message('Please scan for modules first.');
   } else {
     configuration_mode_on = true;
-
-    alert('Drag and drop the modules onto the jacket. <br> Save when done.');
+    show_message('Drag and drop the modules onto the jacket. Save when done.');
   }
 }
 
@@ -198,7 +202,7 @@ function save_configuration() {
   current_dragged_module = 0;
   configuration_mode_on = false;
 
-  alert('Your configurations are saved.');
+  show_message('Your configurations are saved.');
 }
 
 //List all configurations
@@ -214,7 +218,7 @@ function list_configuration() {
 function clear_configuration() {
   current_dragged_module = 0;
   localStorage.clear();
-  alert('All configuration data cleared.');
+  show_message('All configuration data cleared.');
 }
 
 // Vibration Motor Class
@@ -306,12 +310,12 @@ function scan_modules() {
   //Mock progress bar for now
 
   var htmlmessage = 'Scanning';
-  alert(htmlmessage)
+  show_message(htmlmessage)
 
   window.setTimeout(function () {
     scan_complete = true;
     htmlmessage = total_number_of_modules + ' modules found.';
-    alert(htmlmessage);
+    show_message(htmlmessage);
   }, 500);
 }
 
