@@ -11,7 +11,7 @@ var configuration_mode_on = false;
 var total_number_of_modules = 60;
 
 var scan_complete = false;
-let screen_width = 1300;
+let screen_width = 1200;
 //Check if storage_file exists
 var configuration_storage_exists = false;
 
@@ -40,9 +40,9 @@ function setup() {
 
   //Render initial components
   pixelDensity(2.0);
-  document.getElementById("config_confirm_btn").style.display = "none";
+  
   document.getElementById("progressbar").style.visibility = "hidden";
-  createCanvas(screen_width, 720);
+  createCanvas(screen_width, 690);
   jacket_img = loadImage('img/jacket.png');
 
   //Generate IP initially
@@ -184,8 +184,7 @@ function configure() {
     alert('Please scan for modules first.');
   } else {
     configuration_mode_on = true;
-    document.getElementById("config_confirm_btn").style.display = "initial";
-    document.getElementById("configure_btn").style.display = "none";
+
     alert('Drag and drop the modules onto the jacket. <br> Save when done.');
   }
 }
@@ -194,8 +193,7 @@ function save_configuration() {
   
   current_dragged_module = 0;
   configuration_mode_on = false;
-  document.getElementById("config_confirm_btn").style.display = "none";
-  document.getElementById("configure_btn").style.display = "initial";
+
   alert('Your configurations are saved.');
 }
 

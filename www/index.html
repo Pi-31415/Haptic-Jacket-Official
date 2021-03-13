@@ -59,22 +59,20 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbar-collapse-04">
             <ul class="nav navbar-nav">
-                <li><a href="#">Messages<span class="navbar-unread">1</span></a></li>
-                <li class="active"><a href="#">About Us</a></li>
-                <li><a href="#">Clients</a></li>
+                <li><a href="#" onclick="scan_modules()">Scan Nearby Modules</a></li>
+
+                <li class="active"><a href="#" onclick="show_help()">Help</a>
+                </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">MonsterCritic</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="configure()">Configure Positions</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#" onclick="save_configuration()">Save Positions</a></li>
+                        <li><a href="#" onclick="clear_configuration()">Reset All</a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                
+
                 <li>
                     <a href="#">
                         <span class="d-lg-none">Settings<span class="fui-gear"></span></span>
@@ -88,34 +86,6 @@
 
     <!--Main Content Begins-->
 
-    <nav>
-        <div class="nav-wrapper">
-            <span class="brand-logo">Haptic Jacket Controller</span>
-            <ul class="right">
-                <li><a class="waves-effect waves-light btn purple lighten-2" onclick="show_help()">Help<i
-                            class="material-icons right">help</i></a></li>
-                <li id="configure_btn"><a class="waves-effect waves-light btn purple lighten-2"
-                        onclick="configure()">Configure
-                        Positions<i class="material-icons right">settings</i></a></li>
-                <div id="config_confirm_btn">
-                    <li>
-                        <a class="waves-effect waves-light btn green darken-2" onclick="save_configuration()">Save
-                            Positions<i class="material-icons right">check</i></a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-light btn red darken-1" onclick="clear_configuration()">Reset All<i
-                                class="material-icons right">clear</i></a>
-                    </li>
-
-                </div>
-
-
-                <li><a class="waves-effect waves-light btn purple lighten-2" onclick="scan_modules()">Scan Nearby
-                        Modules<i class="material-icons right">search</i></a></li>
-            </ul>
-        </div>
-    </nav>
-
 
     <div class="progress" id="progressbar">
         <div class="indeterminate"></div>
@@ -128,38 +98,6 @@
 
 
     <!--Main Content Ends-->
-
-    <!--Footer-->
-    <div class="mtl pbl">
-        <div class="bottom-menu bottom-menu-inverse">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2 col-sm-2">
-                        <a href="#fakelink" class="bottom-menu-brand">Flat UI</a>
-                    </div>
-                    <div class="col-md-8 col-sm-8">
-                        <ul class="bottom-menu-list">
-                            <li><a href="#fakelink">About Us</a></li>
-                            <li><a href="#fakelink">Store</a></li>
-                            <li class="active"><a href="#fakelink">Jobs</a></li>
-                            <li><a href="#fakelink">Privacy</a></li>
-                            <li><a href="#fakelink">Terms</a></li>
-                            <li><a href="#fakelink">Follow Us</a></li>
-                            <li><a href="#fakelink">Support</a></li>
-                            <li><a href="#fakelink">Links</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-2">
-                        <ul class="bottom-menu-iconic-list">
-                            <li><a href="#fakelink" class="fui-pinterest"></a></li>
-                            <li><a href="#fakelink" class="fui-facebook"></a></li>
-                            <li><a href="#fakelink" class="fui-twitter"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- /bottom-menu-inverse -->
-    </div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
