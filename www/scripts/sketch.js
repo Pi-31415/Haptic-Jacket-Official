@@ -11,7 +11,7 @@ var configuration_mode_on = false;
 var total_number_of_modules = 60;
 
 var scan_complete = false;
-let screen_width = 1200;
+let screen_width = 1300;
 //Check if storage_file exists
 var configuration_storage_exists = false;
 
@@ -41,7 +41,7 @@ function setup() {
   //Render initial components
   pixelDensity(2.0);
   
-  document.getElementById("progressbar").style.visibility = "hidden";
+
   createCanvas(screen_width, 690);
   jacket_img = loadImage('img/jacket.png');
 
@@ -102,6 +102,10 @@ function draw() {
   }
 }
 
+function show_message(msg){
+  document.getElementById("messagebox").innerHTML = msg;
+}
+
 //Configuration Dummy Motor related functions
 function mousePressed() {
   if (overBox) {
@@ -133,7 +137,7 @@ function mouseReleased() {
       console.log("Saved Location : Motor " + current_dragged_module + " : (" + localStorage.getItem(current_dragged_module + "-x") + "," + localStorage.getItem(current_dragged_module + "-y") + ")");
       current_dragged_module = 0;
     } else {
-      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      //document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
   }
 
@@ -303,10 +307,9 @@ function scan_modules() {
 
   var htmlmessage = 'Scanning';
   alert(htmlmessage)
-  document.getElementById("progressbar").style.visibility = "visible";
+
   window.setTimeout(function () {
     scan_complete = true;
-    document.getElementById("progressbar").style.visibility = "hidden";
     htmlmessage = total_number_of_modules + ' modules found.';
     alert(htmlmessage);
   }, 500);

@@ -53,31 +53,37 @@
 
 
     <nav class="navbar navbar-inverse navbar-embossed navbar-expand-lg navbar-lg" role="navigation">
-        <a class="navbar-brand" href="#">Flat UI</a>
+        <a class="navbar-brand" href="#">H</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-04">
         </button>
 
         <div class="collapse navbar-collapse justify-content-between" id="navbar-collapse-04">
             <ul class="nav navbar-nav">
-                <li><a href="#" onclick="scan_modules()">Scan Nearby Modules</a></li>
+                <li><a href="#" onclick="scan_modules()"><span class="fui-search"></span> Scan Nearby Modules   </a></li>
 
-                <li class="active"><a href="#" onclick="show_help()">Help</a>
-                </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="configure()">Configure Positions</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="configure()">
+                        <span class="fui-gear"></span> 
+                        Configure Positions 
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="save_configuration()">Save Positions</a></li>
-                        <li><a href="#" onclick="clear_configuration()">Reset All</a></li>
+                        <li><a href="#" onclick="save_configuration()">
+                            <span class="fui-check-circle"></span> 
+                            Save Positions
+                        </a></li>
+                        <li><a href="#" onclick="clear_configuration()">
+                            <span class="fui-cross-circle"></span> 
+                            Reset All
+                        </a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
                 <li>
-                    <a href="#">
-                        <span class="d-lg-none">Settings<span class="fui-gear"></span></span>
-                        <span class="d-none d-lg-block"><span class="fui-gear"></span></span>
-                    </a>
+                    <a href="#" id="messagebox"> Help  </a>
+                </li>
+                <li>
+                    <a href="#" onclick="show_help()"><span class="fui-question-circle"></span> Help  </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -85,12 +91,6 @@
 
 
     <!--Main Content Begins-->
-
-
-    <div class="progress" id="progressbar">
-        <div class="indeterminate"></div>
-    </div>
-
 
     <main>
 
