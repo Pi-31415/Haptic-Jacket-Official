@@ -44,3 +44,16 @@ npm start
 electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
 ```
 
+## Editing Style
+
+ To compile scss, run
+
+ ```
+sass --watch www/styles/flat-ui-pro.scss:www/css/flat-ui-pro.css
+ ```
+
+ Install sass if not available by running 
+
+ ```
+ sudo npm install -g sass
+ ```

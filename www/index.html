@@ -44,6 +44,9 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <!--p5.js add-->
+    <script src="./scripts/p5.min.js"></script>
+    <script src="./scripts/sketch.js"></script>
 </head>
 
 <body>
@@ -59,8 +62,6 @@
                 <li><a href="#">Messages<span class="navbar-unread">1</span></a></li>
                 <li class="active"><a href="#">About Us</a></li>
                 <li><a href="#">Clients</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">MonsterCritic</a>
                     <ul class="dropdown-menu">
@@ -71,6 +72,9 @@
                         <li><a href="#">Separated link</a></li>
                     </ul>
                 </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                
                 <li>
                     <a href="#">
                         <span class="d-lg-none">Settings<span class="fui-gear"></span></span>
@@ -84,66 +88,45 @@
 
     <!--Main Content Begins-->
 
-    <div class="container ptl contents-ui">
-        <div class="demo-row typography-row">
-            <div class="demo-title">
-                <h3 class="demo-panel-title">Typography</h3>
-            </div>
-            <div class="demo-content">
-                <div class="demo-type-example">
-                    <h1><span class="demo-heading-note">Header 1</span>Showers across the</h1>
-                </div>
-                <div class="demo-type-example">
-                    <h2><span class="demo-heading-note">Header 2</span>Give this quartet a few</h2>
-                </div>
-                <div class="demo-type-example">
-                    <h3><span class="demo-heading-note">Header 3</span>The Vatican transitions to a</h3>
-                </div>
-                <div class="demo-type-example">
-                    <h4><span class="demo-heading-note">Header 4</span>Great American Bites: Telluride's Oak, The</h4>
-                </div>
-                <div class="demo-type-example">
-                    <h5><span class="demo-heading-note">Header 5</span>Author Diane Alberts loves her some good</h5>
-                </div>
-                <div class="demo-type-example">
-                    <h6><span class="demo-heading-note">Header 6</span>With the success of young-adult book-to-movie
-                    </h6>
-                </div>
-                <div class="demo-type-example">
-                    <span class="demo-text-note">Paragraph</span>
-                    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        <strong>Donec ullamcorper</strong> nulla non metus auctor fringilla. Duis mollis, est non
-                        commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-                </div>
-                <div class="demo-type-example">
-                    <span class="demo-text-note">Image</span>
-                    <img src="images/exaple-image.jpg" alt="exaple-image" class="img-rounded img-responsive">
-                    <p class="img-comment"><strong>Note:</strong> gravida at eget metus. Duis mollis, est non commodo
-                        luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-                </div>
-                <div class="demo-type-example">
-                    <span class="demo-text-note">Lead Text</span>
-                    <p class="lead">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus.</p>
-                </div>
-                <div class="demo-type-example">
-                    <span class="demo-text-note">Quote</span>
-                    <blockquote>
-                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-                            ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus.</p>
-                        <small>Steve Jobs, CEO Apple</small>
-                    </blockquote>
-                </div>
-                <div class="demo-type-example">
-                    <span class="demo-text-note">Small Font</span>
-                    <p><small>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                            Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus,
-                            nisi erat porttitor ligula, eget lacinia odio sem nec elit.</small></p>
-                </div>
-            </div><!-- /.demo-content-wide -->
-        </div><!-- /.demo-row -->
+    <nav>
+        <div class="nav-wrapper">
+            <span class="brand-logo">Haptic Jacket Controller</span>
+            <ul class="right">
+                <li><a class="waves-effect waves-light btn purple lighten-2" onclick="show_help()">Help<i
+                            class="material-icons right">help</i></a></li>
+                <li id="configure_btn"><a class="waves-effect waves-light btn purple lighten-2"
+                        onclick="configure()">Configure
+                        Positions<i class="material-icons right">settings</i></a></li>
+                <div id="config_confirm_btn">
+                    <li>
+                        <a class="waves-effect waves-light btn green darken-2" onclick="save_configuration()">Save
+                            Positions<i class="material-icons right">check</i></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light btn red darken-1" onclick="clear_configuration()">Reset All<i
+                                class="material-icons right">clear</i></a>
+                    </li>
 
-    </div><!-- /.container -->
+                </div>
+
+
+                <li><a class="waves-effect waves-light btn purple lighten-2" onclick="scan_modules()">Scan Nearby
+                        Modules<i class="material-icons right">search</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="progress" id="progressbar">
+        <div class="indeterminate"></div>
+    </div>
+
+
+    <main>
+
+    </main>
+
+
     <!--Main Content Ends-->
 
     <!--Footer-->
