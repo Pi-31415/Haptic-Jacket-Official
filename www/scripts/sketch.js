@@ -31,13 +31,15 @@ let yOffset = 0.0;
 
 var myFont;
 
-function preload(){
+function preload() {
   myFont = loadFont("./fonts/lato/lato-light.ttf");
 }
 
 function setup() {
   textFont(myFont);
-  //Scan a random number of modules
+  //Disable GUI Buttons
+  document.getElementById("btn_save").style.display = "none";
+  document.getElementById("btn_reset").style.display = "none";
   //Maximum support is 60, but IP can only handle 28 on screen.
 
   total_number_of_modules = floor(random(10, 28));
@@ -45,7 +47,7 @@ function setup() {
 
   //Render initial components
   pixelDensity(3.0);
-  
+
 
   createCanvas(screen_width, 690);
   jacket_img = loadImage('img/jacket.svg');
@@ -59,7 +61,7 @@ function setup() {
 
 function draw() {
   //Set up scene
-  background(255,255,255);
+  background(255, 255, 255);
   fill(color(150, 150, 150));
   image(jacket_img, 20, 20, 1000, 580);
 
@@ -107,8 +109,22 @@ function draw() {
   }
 }
 
-function show_message(msg){
-  document.getElementById("messagebox").innerHTML = "<i style='font-weight:normal'>"+ msg + "</i>";
+function show_message(msg) {
+  document.getElementById("messagebox").innerHTML = "<i style='font-weight:normal'>" + msg + "</i>";
+}
+
+function toggle_configure() {
+
+  if (configuration_mode_on) {
+    document.getElementById("btn_configure").style.display = "none";
+    document.getElementById("btn_save").style.display = "block";
+    document.getElementById("btn_reset").style.display = "block";
+  } else {
+    document.getElementById("btn_configure").style.display = "block";
+    document.getElementById("btn_save").style.display = "none";
+    document.getElementById("btn_reset").style.display = "none";
+  }
+
 }
 
 //Configuration Dummy Motor related functions
@@ -188,21 +204,22 @@ function show_help() {
 
 function configure() {
   current_dragged_module = 0;
-  
   if (!scan_complete) {
     show_message('Please scan for modules first.');
   } else {
     configuration_mode_on = true;
     show_message('Drag and drop the modules onto the jacket. Save when done.');
+    toggle_configure();
   }
 }
 
 function save_configuration() {
-  
+
   current_dragged_module = 0;
   configuration_mode_on = false;
 
   show_message('Your configurations are saved.');
+  toggle_configure();
 }
 
 //List all configurations
@@ -219,6 +236,7 @@ function clear_configuration() {
   current_dragged_module = 0;
   localStorage.clear();
   show_message('All configuration data cleared.');
+  toggle_configure();
 }
 
 // Vibration Motor Class

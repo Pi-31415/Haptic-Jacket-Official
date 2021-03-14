@@ -53,44 +53,49 @@
 
 
     <nav class="navbar navbar-inverse navbar-embossed navbar-expand-lg navbar-lg" role="navigation">
-        <a class="navbar-brand" href="#">Haptic Jacket Controller</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-04">
         </button>
 
         <div class="collapse navbar-collapse justify-content-between" id="navbar-collapse-04">
             <ul class="nav navbar-nav">
-                <li><a href="#" onclick="scan_modules()"><span class="fui-search"></span> Scan Nearby Modules   </a></li>
+                <li><a href="#" onclick="scan_modules()"><span class="fui-search"></span> Scan Nearby Modules </a></li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" onclick="configure()">
-                        <span class="fui-gear"></span> 
-                        Configure Positions 
+
+                <li id="btn_configure">
+                    <a href="#" onclick="configure()">
+                        <span class="fui-gear"></span>
+                        Configure Positions
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" onclick="save_configuration()">
-                            <span class="fui-check-circle"></span> 
-                            Save Positions
-                        </a></li>
-                        <li><a href="#" onclick="clear_configuration()">
-                            <span class="fui-cross-circle"></span> 
-                            Reset All
-                        </a></li>
-                    </ul>
                 </li>
+
+                <li id="btn_save">
+                    <a href="#" onclick="save_configuration()">
+                        <span class="fui-check-circle"></span>
+                        Save Positions
+                    </a>
+                </li>
+                <li id="btn_reset">
+                    <a href="#" onclick="clear_configuration()">
+                        <span class="fui-cross-circle"></span>
+                        Reset All
+                    </a>
+                </li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" id="messagebox"> 
+                    <a href="#" id="messagebox">
                     </a>
                 </li>
                 <li>
-                   
+
                 </li>
                 <li>
-                    
+
                 </li>
                 <li>
-                    <a href="#" onclick="show_help()"><span class="fui-question-circle"></span> Help  </a>
+                    <a href="#" onclick="show_help()"><span class="fui-question-circle"></span> Help </a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
