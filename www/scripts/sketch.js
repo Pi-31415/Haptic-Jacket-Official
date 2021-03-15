@@ -194,7 +194,7 @@ function RenderMotors(number_of_motors) {
 }
 
 function show_help() {
-  show_message("Show Tutorial");
+  show_message("First scan modules. Then configure the positions. Hover with mouse to activate.");
 }
 
 function configure() {
