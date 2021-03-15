@@ -170,8 +170,9 @@ function RenderMotors(number_of_motors) {
   var currentX = 50;
 
   noFill();
-  stroke(127, 63, 120);
-  rect(20, 560, 1020, 160);
+  stroke(20,72,84);
+  //Table to place unconfigured modules
+  rect(20, 560, 1020, 120);
 
   //Render the motors in a rectangular array if configuration does not exist
   for (j = 1; j <= 4; j++) {
@@ -248,23 +249,30 @@ class VibrationMotor {
     //Color scheme
     this.color_vibrating = color(33,218,189); //Torquise
     this.color_non_vibration = color(19,68,92); //Grey
+    //API calls
+    this.API_activated = false;
   }
   move(x, y) {
     this.init_x = x;
     this.init_y = y;
   }
+  API_activate(duration){
+    this.API_activated = true;
+  }
   activate() {
+    //Activate via mouse hover or API call
     if (
-      mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
+      (mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
       mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
       mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
-      mouseY <= this.init_y + (this.diameter * this.sensitivity)
+      mouseY <= this.init_y + (this.diameter * this.sensitivity))
+      || (this.API_activated)
     ) {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
 
-      console.log('current drag ID: ' + current_dragged_module);
+      //console.log('current drag ID: ' + current_dragged_module);
 
       if (!locked && configuration_mode_on) {
         current_dragged_module = this.ID;
@@ -287,8 +295,8 @@ class VibrationMotor {
     //if configuration mode is off, play vibration animations with delay time
     if (!configuration_mode_on) {
       stroke(0, 0, 0);
-      if (this.is_vibrating) {
-        //only vibrate if configuration mode mode is off
+      if (this.is_vibrating && this.init_y <= 530) {
+        //only play vibrate animation if configuration mode mode is off
         this.x = this.init_x;
         this.y = this.init_y;
         this.x += random(-this.intensity, this.intensity);
