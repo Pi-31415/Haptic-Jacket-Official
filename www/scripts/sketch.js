@@ -40,14 +40,12 @@ function setup() {
   //Disable GUI Buttons
   document.getElementById("btn_save").style.display = "none";
   document.getElementById("btn_reset").style.display = "none";
+
   //Maximum support is 60, but IP can only handle 28 on screen.
-
   total_number_of_modules = floor(random(10, 28));
-
 
   //Render initial components
   pixelDensity(3.0);
-
 
   createCanvas(screen_width, 690);
   jacket_img = loadImage('img/jacket.svg');
@@ -56,7 +54,6 @@ function setup() {
   for (var l = 1; l <= total_number_of_modules; l++) {
     IP[l] = generate_IP();
   }
-
 }
 
 function draw() {
@@ -91,13 +88,13 @@ function draw() {
     overBox = true;
     if (!locked) {
       //if not locked, display purple on dummy
-      fill(color(186, 104, 200));
+      fill(color(33,218,189));
     } else {
-      //selection color on dummy - dark purple
-      fill(87, 6, 140);
+      //selection color on dummy - dark torquise
+      fill(20,72,84);
     }
   } else {
-    fill(color(150, 150, 150));
+    fill(color(20,72,84));
     overBox = false;
   }
 
@@ -114,7 +111,6 @@ function show_message(msg) {
 }
 
 function toggle_configure() {
-
   if (configuration_mode_on) {
     document.getElementById("btn_configure").style.display = "none";
     document.getElementById("btn_save").style.display = "block";
@@ -124,7 +120,6 @@ function toggle_configure() {
     document.getElementById("btn_save").style.display = "none";
     document.getElementById("btn_reset").style.display = "none";
   }
-
 }
 
 //Configuration Dummy Motor related functions
@@ -161,7 +156,6 @@ function mouseReleased() {
       //document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
   }
-
   locked = false;
 }
 
@@ -214,10 +208,8 @@ function configure() {
 }
 
 function save_configuration() {
-
   current_dragged_module = 0;
   configuration_mode_on = false;
-
   show_message('Your configurations are saved.');
   toggle_configure();
 }
@@ -254,8 +246,8 @@ class VibrationMotor {
     this.ID = autoID;
     this.is_vibrating = false;
     //Color scheme
-    this.color_vibrating = color(186, 104, 200);
-    this.color_non_vibration = color(150, 150, 150);
+    this.color_vibrating = color(33,218,189); //Torquise
+    this.color_non_vibration = color(19,68,92); //Grey
   }
   move(x, y) {
     this.init_x = x;
@@ -325,11 +317,8 @@ class VibrationMotor {
 
 
 function scan_modules() {
-  //Mock progress bar for now
-
   var htmlmessage = 'Scanning';
   show_message(htmlmessage)
-
   window.setTimeout(function () {
     scan_complete = true;
     htmlmessage = total_number_of_modules + ' modules found.';
@@ -343,8 +332,8 @@ function generate_IP() {
 }
 
 function show_IP() {
-  text('Modules and Associated IP', 1060, 15);
+  text('Modules and Associated IP', 1060, 9);
   for (var l = 1; l < motorGUI.length; l++) {
-    text(l + ' - ' + IP[l], 1060, 10 + (25 * l));
+    text(l + '\t:\t' + IP[l], 1060, 10 + (25 * l));
   }
 }
