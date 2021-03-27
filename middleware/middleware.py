@@ -26,14 +26,15 @@ def stop_all_motors():
     send_UDP_message(COMMAND)
     print("All Motors Stopped")
 
-def continuous():
+def continuous(delay_time):
     x = 1
     while True:
         stop_all_motors()
         activate_motor(x)
-        sleep(0.1)
+        #Delay the time between motors in seconds
+        sleep(delay_time)
         x += 1
         if(x>=18):
             x=1
 
-continuous()
+continuous(0.2)
