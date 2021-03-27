@@ -10,10 +10,11 @@ import socket
 
 UDP_IP = "127.0.0.1"
 UDP_PORT = 33333
-COMMAND = b"1"
 
+def activate_motor(motor_id):
+    COMMAND = motor_id
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Internet  # UDP
+    sock.sendto(COMMAND, (UDP_IP, UDP_PORT))
+    print("message: %s" % COMMAND)
 
-print("message: %s" % COMMAND)
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Internet  # UDP
-sock.sendto(COMMAND, (UDP_IP, UDP_PORT))
+activate_motor(1)
