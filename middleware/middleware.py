@@ -5,10 +5,10 @@ Description:  This is the Haptic Jacket controller middleware in Python
 Dependencies : socket
 '''
 
-
 import socket
 from time import sleep
 
+# UDP Configuration
 UDP_IP = "127.0.0.1"
 UDP_PORT = 33333
 
@@ -34,7 +34,7 @@ def continuous_motion(delay_time):
         #Delay the time between motors in seconds
         sleep(delay_time)
         x += 1
-        if(x>=20):
+        if(x>=30):
             x=1
 
 activate_motor(1)
@@ -44,5 +44,5 @@ sleep(1)
 activate_motor(3)
 sleep(1)
 activate_motor(4)
-sleep(5)
+sleep(3)
 continuous_motion(0.2)
