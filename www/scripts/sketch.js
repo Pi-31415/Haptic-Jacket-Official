@@ -17,7 +17,6 @@ function UDP_bind() {
   server.on('listening', function () {
     var address = server.address();
     console.log('UDP Server listening on ' + address.address + ':' + address.port);
-    console.log('Motor ID : ' + UDP_motorid);
   });
 
   server.on('message', function (message, remote) {
