@@ -105,7 +105,7 @@ function draw() {
 
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
-        if (UDP_motorid[y] != 0) {
+        if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
           motorGUI[UDP_motorid[y]].API_activated = true;
         }
       }
