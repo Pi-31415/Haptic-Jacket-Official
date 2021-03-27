@@ -2,6 +2,8 @@
 
 This is the official repository for the haptic jacket middleware for my research project.
 
+Documentation [on Gitbook](https://pi31415.gitbook.io/haptic-jacket/)
+
 ### Related Repositories
 
 - [UDP-Client-Server-Test](https://github.com/Pi-31415/UDP-Client-Server-Test)
@@ -43,6 +45,12 @@ npm start
 # Mac Build
 electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
 ```
+
+```
+# Ubuntu Build
+npm run build:package && npm run build:snap
+```
+Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
 
 ## Editing Style
 
