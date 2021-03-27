@@ -57,3 +57,7 @@ sass --watch www/styles/flat-ui-pro.scss:www/css/flat-ui-pro.css
  ```
  sudo npm install -g sass
  ```
+
+ ## Running Middleware
+
+ For Programmers, the Haptic Jacket GUI app can be invoked through a python API. Run the file in middleware folder.
