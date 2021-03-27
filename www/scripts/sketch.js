@@ -7,7 +7,7 @@
 
 // UDP related libraries
 var PORT = 33333;
-var UDP_motorid = 0;
+var UDP_motorid = [];
 var HOST = '127.0.0.1';
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
@@ -22,7 +22,12 @@ function UDP_bind() {
 
   server.on('message', function (message, remote) {
     //alert(message);
-    UDP_motorid = Number(message);
+    if (message = 0) {
+      //Stop if the incoming UDP message is 0
+      UDP_motorid = [0]
+    } else {
+      UDP_motorid = push(Number(message));
+    }
   });
 
   server.bind(PORT, HOST);
@@ -99,8 +104,10 @@ function draw() {
     for (var l = 1; l < motorGUI.length; l++) {
 
       //listen to UDP and activate accordingly;
-      if (UDP_motorid != 0) {
-        motorGUI[UDP_motorid].API_activated = true;
+      for (var y = 1; y < UDP_motorid.length; y++) {
+        if (UDP_motorid[y] != 0) {
+          motorGUI[UDP_motorid[y]].API_activated = true;
+        }
       }
 
 
