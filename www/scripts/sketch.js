@@ -5,6 +5,55 @@
 /* Dependencies : node, materialize and p5.js*/
 /*-------------------------------------------------*/
 
+// UDP related libraries
+var PORT = 33333;
+var motorid = 1;
+var HOST = '127.0.0.' + motorid;
+
+var dgram = require('dgram');
+var server = dgram.createSocket('udp4');
+
+function UDP_bind() {
+  server.on('listening', function () {
+    var address = server.address();
+    console.log('UDP Server listening on ' + address.address + ':' + address.port);
+    console.log('Motor ID : ' + motorid);
+  });
+
+  server.on('message', function (message, remote) {
+    //Date Time
+    let date_ob = new Date();
+
+    // current date
+    // adjust 0 before single digit date
+    let date = ("0" + date_ob.getDate()).slice(-2);
+
+    // current month
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+    // current year
+    let year = date_ob.getFullYear();
+
+    // current hours
+    let hours = date_ob.getHours();
+
+    // current minutes
+    let minutes = date_ob.getMinutes();
+
+    // current seconds
+    let seconds = date_ob.getSeconds();
+    //Date Time ends
+
+    //console.log(remote.address + ':' + remote.port +' - ' + message);
+    console.log("[" + year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + "] \t" + remote.address + ': \t' + message);
+    //console.log();
+
+  });
+
+  server.bind(PORT, HOST);
+}
+
+// GUI related variables
 let jacket_img;
 var configuration_mode_on = false;
 
@@ -37,6 +86,7 @@ function preload() {
 
 function setup() {
   textFont(myFont);
+  UDP_bind();
   //Disable GUI Buttons
   document.getElementById("btn_save").style.display = "none";
   document.getElementById("btn_reset").style.display = "none";
@@ -88,13 +138,13 @@ function draw() {
     overBox = true;
     if (!locked) {
       //if not locked, display purple on dummy
-      fill(color(33,218,189));
+      fill(color(33, 218, 189));
     } else {
       //selection color on dummy - dark torquise
-      fill(20,72,84);
+      fill(20, 72, 84);
     }
   } else {
-    fill(color(20,72,84));
+    fill(color(20, 72, 84));
     overBox = false;
   }
 
@@ -159,7 +209,6 @@ function mouseReleased() {
   locked = false;
 }
 
-
 //GUI Related Functions
 function RenderMotors(number_of_motors) {
   var autoID = 1;
@@ -170,7 +219,7 @@ function RenderMotors(number_of_motors) {
   var currentX = 50;
 
   noFill();
-  stroke(20,72,84);
+  stroke(20, 72, 84);
   //Table to place unconfigured modules
   rect(20, 560, 1020, 120);
 
@@ -247,8 +296,8 @@ class VibrationMotor {
     this.ID = autoID;
     this.is_vibrating = false;
     //Color scheme
-    this.color_vibrating = color(33,218,189); //Torquise
-    this.color_non_vibration = color(19,68,92); //Grey
+    this.color_vibrating = color(33, 218, 189); //Torquise
+    this.color_non_vibration = color(19, 68, 92); //Grey
     //API calls
     this.API_activated = false;
   }
@@ -256,16 +305,16 @@ class VibrationMotor {
     this.init_x = x;
     this.init_y = y;
   }
-  API_activate(duration){
+  API_activate(duration) {
     this.API_activated = true;
   }
   activate() {
     //Activate via mouse hover or API call
     if (
       (mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
-      mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
-      mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
-      mouseY <= this.init_y + (this.diameter * this.sensitivity))
+        mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
+        mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
+        mouseY <= this.init_y + (this.diameter * this.sensitivity))
       || (this.API_activated)
     ) {
       //Activate Vibration for a duration
@@ -322,7 +371,6 @@ class VibrationMotor {
     }
   }
 }
-
 
 function scan_modules() {
   var htmlmessage = 'Scanning';
