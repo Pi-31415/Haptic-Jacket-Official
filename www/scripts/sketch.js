@@ -7,47 +7,22 @@
 
 // UDP related libraries
 var PORT = 33333;
-var motorid = 1;
-var HOST = '127.0.0.' + motorid;
-
+var UDP_motorid = 0;
+var HOST = '127.0.0.1';
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
+
 
 function UDP_bind() {
   server.on('listening', function () {
     var address = server.address();
     console.log('UDP Server listening on ' + address.address + ':' + address.port);
-    console.log('Motor ID : ' + motorid);
+    console.log('Motor ID : ' + UDP_motorid);
   });
 
   server.on('message', function (message, remote) {
-    //Date Time
-    let date_ob = new Date();
-
-    // current date
-    // adjust 0 before single digit date
-    let date = ("0" + date_ob.getDate()).slice(-2);
-
-    // current month
-    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-
-    // current year
-    let year = date_ob.getFullYear();
-
-    // current hours
-    let hours = date_ob.getHours();
-
-    // current minutes
-    let minutes = date_ob.getMinutes();
-
-    // current seconds
-    let seconds = date_ob.getSeconds();
-    //Date Time ends
-
-    //console.log(remote.address + ':' + remote.port +' - ' + message);
-    console.log("[" + year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + "] \t" + remote.address + ': \t' + message);
-    //console.log();
-
+    //alert(message);
+    UDP_motorid = Number(message);
   });
 
   server.bind(PORT, HOST);
@@ -122,10 +97,19 @@ function draw() {
     RenderMotors(total_number_of_modules);
     //Activate Vibration Detection
     for (var l = 1; l < motorGUI.length; l++) {
+
+      //listen to UDP and activate accordingly;
+      if (UDP_motorid != 0) {
+        motorGUI[UDP_motorid].API_activated = true;
+      }
+
+
       motorGUI[l].activate();
     }
     show_IP();
   }
+
+
 
   //Configuration Motor Dummy
   // Test if the cursor is over the box
