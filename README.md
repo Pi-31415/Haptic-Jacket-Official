@@ -46,6 +46,12 @@ npm start
 electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
 ```
 
+```
+# Ubuntu Build
+npm run build:package && npm run build:snap
+```
+Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
+
 ## Editing Style
 
  To compile scss, run
