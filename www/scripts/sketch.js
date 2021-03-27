@@ -22,11 +22,12 @@ function UDP_bind() {
 
   server.on('message', function (message, remote) {
     //alert(message);
-    if (message = 0) {
+    if (message == 0) {
       //Stop if the incoming UDP message is 0
       UDP_motorid = [0]
     } else {
-      UDP_motorid = push(Number(message));
+      UDP_motorid.push(Number(message));
+      console.log(UDP_motorid);
     }
   });
 
@@ -104,7 +105,7 @@ function draw() {
     for (var l = 1; l < motorGUI.length; l++) {
 
       //listen to UDP and activate accordingly;
-      for (var y = 1; y < UDP_motorid.length; y++) {
+      for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0) {
           motorGUI[UDP_motorid[y]].API_activated = true;
         }
