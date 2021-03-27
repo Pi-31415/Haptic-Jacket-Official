@@ -1,8 +1,8 @@
 '''
 Author : Pi 
 Date: Mar 27, 2021
-Description:  This is the Haptic Jacket controller middleware in Python
-Dependencies : socket
+Description:  This is the Haptic Jacket controller middleware API in Python
+Dependencies : socket, time
 '''
 
 import socket
@@ -26,7 +26,7 @@ def stop_all_motors():
     send_UDP_message(COMMAND)
     print("All Motors Stopped")
 
-def continuous_motion(delay_time):
+def continuous_motion(delay_time,maximum_motor_id):
     x = 1
     while True:
         stop_all_motors()
@@ -34,15 +34,8 @@ def continuous_motion(delay_time):
         #Delay the time between motors in seconds
         sleep(delay_time)
         x += 1
-        if(x>=30):
+        if(x>=maximum_motor_id):
             x=1
 
-activate_motor(1)
-sleep(1)
-activate_motor(2)
-sleep(1)
-activate_motor(3)
-sleep(1)
-activate_motor(4)
-sleep(3)
-continuous_motion(0.2)
+def delay(delay_time):
+    sleep(delay_time)
