@@ -87,7 +87,7 @@ function draw() {
   //Set up scene
   background(255, 255, 255);
   fill(color(150, 150, 150));
-  image(jacket_img, 20, 5, 800, 460);
+  image(jacket_img, 100, 5, 800, 460);
 
   //Check if localstorage exists
   if (localStorage.getItem("1-x") != null) {
