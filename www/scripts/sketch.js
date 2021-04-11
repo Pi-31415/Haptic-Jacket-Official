@@ -38,9 +38,10 @@ let jacket_img;
 var configuration_mode_on = false;
 
 var total_number_of_modules = 60;
-
 var scan_complete = false;
-let screen_width = 1300;
+let screen_width = 1050;
+let box_boundary_y_coordinate = 450;
+
 //Check if storage_file exists
 var configuration_storage_exists = false;
 
@@ -77,20 +78,16 @@ function setup() {
   //Render initial components
   pixelDensity(3.0);
 
-  createCanvas(screen_width, 690);
+  createCanvas(screen_width, 600);
   jacket_img = loadImage('img/jacket.svg');
-
-  //Generate IP initially
-  for (var l = 1; l <= total_number_of_modules; l++) {
-    IP[l] = generate_IP();
-  }
+ 
 }
 
 function draw() {
   //Set up scene
   background(255, 255, 255);
   fill(color(150, 150, 150));
-  image(jacket_img, 20, 20, 1000, 580);
+  image(jacket_img, 20, 5, 800, 460);
 
   //Check if localstorage exists
   if (localStorage.getItem("1-x") != null) {
@@ -102,18 +99,15 @@ function draw() {
     RenderMotors(total_number_of_modules);
     //Activate Vibration Detection
     for (var l = 1; l < motorGUI.length; l++) {
-
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
           motorGUI[UDP_motorid[y]].API_activated = true;
         }
       }
-
-
       motorGUI[l].activate();
     }
-    show_IP();
+
   }
 
 
@@ -206,13 +200,13 @@ function RenderMotors(number_of_motors) {
   var j, k;
   var current_separator_X = 50;
   var current_separator_Y = 50;
-  var currentY = 600;
+  var currentY = 500;
   var currentX = 50;
 
   noFill();
   stroke(20, 72, 84);
   //Table to place unconfigured modules
-  rect(20, 560, 1020, 120);
+  rect(20, box_boundary_y_coordinate, 1020, 120);
 
   //Render the motors in a rectangular array if configuration does not exist
   for (j = 1; j <= 4; j++) {
@@ -335,7 +329,7 @@ class VibrationMotor {
     //if configuration mode is off, play vibration animations with delay time
     if (!configuration_mode_on) {
       stroke(0, 0, 0);
-      if (this.is_vibrating && this.init_y <= 530) {
+      if (this.is_vibrating && this.init_y <= box_boundary_y_coordinate) {
         //only play vibrate animation if configuration mode mode is off
         this.x = this.init_x;
         this.y = this.init_y;
@@ -376,11 +370,4 @@ function scan_modules() {
 //Mock IP Generator
 function generate_IP() {
   return floor(random(0, 255)) + '.' + floor(random(0, 255)) + '.' + floor(random(0, 255)) + '.' + floor(random(0, 255));
-}
-
-function show_IP() {
-  text('Modules and Associated IP', 1060, 9);
-  for (var l = 1; l < motorGUI.length; l++) {
-    text(l + '\t:\t' + IP[l], 1060, 10 + (25 * l));
-  }
 }
