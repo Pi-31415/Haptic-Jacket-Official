@@ -4,7 +4,8 @@
   "description": "A controller application to control the modules on haptic jacket",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --overwrite --platform=darwin --arch=all --icon=assets/icons/icon.icns --extra-resource=./extraResources/config.json --prune=true --out=release-builds"
   },
   "repository": "https://github.com/Pi-31415/Haptic-Jacket-Official",
   "keywords": [
@@ -16,5 +17,8 @@
   "devDependencies": {
     "electron": "^11.3.0",
     "electron-packager": "^15.2.0"
+  },
+  "dependencies": {
+    "csv": "^5.5.0"
   }
 }
