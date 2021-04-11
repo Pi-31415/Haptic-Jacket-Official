@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
   var path = require('path');
   const csv = require('csv')
 
-  var p = path.join(__dirname, '..', 'config.json');
+  var p = path.join(__dirname, '../../../../', 'config.csv');
   fs.readFile(p, 'utf8', function (err, data) {
     if (err) return console.log(err);
 
