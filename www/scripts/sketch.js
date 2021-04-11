@@ -72,8 +72,8 @@ function setup() {
   document.getElementById("btn_save").style.display = "none";
   document.getElementById("btn_reset").style.display = "none";
 
-  //Maximum support is 60, but IP can only handle 28 on screen.
-  total_number_of_modules = floor(random(10, 28));
+  //Maximum support is 40, but IP can only handle 28 on screen.
+  total_number_of_modules = 40;
 
   //Render initial components
   pixelDensity(3.0);
@@ -367,7 +367,3 @@ function scan_modules() {
   }, 500);
 }
 
-//Mock IP Generator
-function generate_IP() {
-  return floor(random(0, 255)) + '.' + floor(random(0, 255)) + '.' + floor(random(0, 255)) + '.' + floor(random(0, 255));
-}
