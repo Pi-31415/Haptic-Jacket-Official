@@ -43,9 +43,8 @@ def send_UDP_message(message,physical_module_ip,physical_module_port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Internet  # UDP
     # Send the UDP message to GUI Application first, for visualization
     sock.sendto(message, (GUI_IP, GUI_PORT))
-    # Then send the message to actual physical modules
-
-
+    # Then send the message to actual physical modules (0 is off, and anything apart from 0 is on)
+    sock.sendto(message, (physical_module_ip, physical_module_port))
 
 def activate_motor(module_id):
     COMMAND = bytes(str(module_id), 'utf-8')
