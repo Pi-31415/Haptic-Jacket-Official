@@ -39,24 +39,28 @@ def show_modules():
               modules[module_id]['PORT'])
 
 
-def send_UDP_message(message):
+def send_UDP_message(message,physical_module_ip,physical_module_port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Internet  # UDP
-    sock.sendto(message, (UDP_IP, UDP_PORT))
+    # Send the UDP message to GUI Application first, for visualization
+    sock.sendto(message, (GUI_IP, GUI_PORT))
+    # Then send the message to actual physical modules
 
 
-def activate_motor(motor_id):
-    COMMAND = bytes(str(motor_id), 'utf-8')
-    send_UDP_message(COMMAND)
-    print("Motor %s Activated" % motor_id)
+
+def activate_motor(module_id):
+    COMMAND = bytes(str(module_id), 'utf-8')
+    send_UDP_message(COMMAND,modules[module_id]['IP'],modules[module_id]['PORT'])
+    print("Motor %s Activated" % module_id)
 
 
 def stop_all_motors():
     COMMAND = bytes('0', 'utf-8')
-    send_UDP_message(COMMAND)
+    for module_id in modules.keys():
+        send_UDP_message(COMMAND,modules[module_id]['IP'],modules[module_id]['PORT'])
     print("All Motors Stopped")
 
 
-def continuous_motion(delay_time, maximum_motor_id):
+def continuous_motion(delay_time):
     x = 1
     while True:
         stop_all_motors()
@@ -64,7 +68,7 @@ def continuous_motion(delay_time, maximum_motor_id):
         # Delay the time between motors in seconds
         sleep(delay_time)
         x += 1
-        if(x >= maximum_motor_id):
+        if(x > len(modules)):
             x = 1
 
 
