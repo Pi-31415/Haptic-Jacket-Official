@@ -8,18 +8,31 @@ window.addEventListener('DOMContentLoaded', () => {
 
   var fs = require('fs');
   var path = require('path');
-  const csv = require('csv')
+  const csv = require('csv-parser');
 
-  var p = path.join(__dirname, '../../../../', 'config.csv');
-  fs.readFile(p, 'utf8', function (err, data) {
-    if (err) return console.log(err);
 
-    console.log(data);
-    // data is the contents of the text file we just read
-    //localStorage.setItem(current_dragged_module + "-x", parseFloat(bx));
-    //localStorage.setItem(current_dragged_module + "-y", parseFloat(by));
-  });
+  var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
 
+  fs.createReadStream(input_file_path)
+    .pipe(csv())
+    .on('data', function (data) {
+      try {
+        console.log("ID is: " + data.ID);
+        console.log("IP is: " + data.IP);
+
+        //perform the operation
+      }
+      catch (err) {
+        //error handler
+      }
+    })
+    .on('end', function () {
+      //some final operation
+    });
+
+
+  //localStorage.setItem(current_dragged_module + "-x", parseFloat(bx));
+  //localStorage.setItem(current_dragged_module + "-y", parseFloat(by));
 
 
   for (const type of ['chrome', 'node', 'electron']) {

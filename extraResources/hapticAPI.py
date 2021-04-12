@@ -26,8 +26,9 @@ def initiate_config():
         reader = enumerate(csv.reader(f))
         for i, row in reader:
             print(i, row)
-            current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
-            modules[i + 1] = current_module
+            if i != 0:
+                current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
+                modules[i] = current_module
     print('Done')
 
 
@@ -44,7 +45,7 @@ def send_UDP_message(message,physical_module_ip,physical_module_port):
     # Send the UDP message to GUI Application first, for visualization
     sock.sendto(message, (GUI_IP, GUI_PORT))
     # Then send the message to actual physical modules (0 is off, and anything apart from 0 is on)
-    sock.sendto(message, (physical_module_ip, physical_module_port))
+    # sock.sendto(message, (physical_module_ip, physical_module_port))
 
 def activate_motor(module_id):
     COMMAND = bytes(str(module_id), 'utf-8')
