@@ -30,11 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
       //some final operation
     });
 
-
-  //localStorage.setItem(current_dragged_module + "-x", parseFloat(bx));
-  //localStorage.setItem(current_dragged_module + "-y", parseFloat(by));
-
-
+    
   for (const type of ['chrome', 'node', 'electron']) {
     replaceText(`${type}-version`, process.versions[type])
   }
