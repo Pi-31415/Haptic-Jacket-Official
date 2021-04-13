@@ -14,7 +14,7 @@ from time import sleep
 # Dictionary of Available Modules
 modules = {}
 
-# This is the default UDP for communicating with GUI application, not physicalmodules
+# This is the default UDP for communicating with GUI application, not physical modules
 GUI_IP = "127.0.0.1"
 GUI_PORT = 33333
 
@@ -45,7 +45,7 @@ def send_UDP_message(message,physical_module_ip,physical_module_port):
     # Send the UDP message to GUI Application first, for visualization
     sock.sendto(message, (GUI_IP, GUI_PORT))
     # Then send the message to actual physical modules (0 is off, and anything apart from 0 is on)
-    # sock.sendto(message, (physical_module_ip, physical_module_port))
+    sock.sendto(message, (physical_module_ip, physical_module_port))
 
 def activate_motor(module_id):
     COMMAND = bytes(str(module_id), 'utf-8')
