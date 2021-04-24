@@ -36,8 +36,8 @@ function UDP_bind() {
 // GUI related variables
 let jacket_img;
 var configuration_mode_on = false;
+var showing_configuration_data = false;
 
-var total_number_of_modules = 60;
 var scan_complete = false;
 let screen_width = 1050;
 let box_boundary_y_coordinate = 450;
@@ -71,16 +71,20 @@ function setup() {
   //Disable GUI Buttons
   document.getElementById("btn_save").style.display = "none";
   document.getElementById("btn_reset").style.display = "none";
-
+  document.getElementById("btn_hide_config").style.display = "none";
+  document.getElementById("configtable").style.display = "none";
+  document.getElementById("btn_configure").style.display = "none";
   //Maximum support is 40, but IP can only handle 28 on screen.
-  total_number_of_modules = 40;
+  total_number_of_modules = localStorage.getItem("MaxID");
 
   //Render initial components
   pixelDensity(3.0);
 
+  render_config_data();
+
   createCanvas(screen_width, 600);
   jacket_img = loadImage('img/jacket.svg');
- 
+  scan_modules();
 }
 
 function draw() {
@@ -96,7 +100,7 @@ function draw() {
 
   //Render Other Motors
   if (scan_complete) {
-    RenderMotors(total_number_of_modules);
+    RenderMotors(localStorage.getItem("MaxID"));
     //Activate Vibration Detection
     for (var l = 1; l < motorGUI.length; l++) {
       //listen to UDP and activate accordingly;
@@ -145,6 +149,16 @@ function show_message(msg) {
   document.getElementById("messagebox").innerHTML = "<i style='font-weight:normal'>" + msg + "</i>";
 }
 
+function render_config_data() {
+  //Renders data from configuration file onto GUI
+  //render configuration file data onto GUI
+  var j;
+  for (j = 1; j <= localStorage.getItem("MaxID"); j++) {
+    document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>" + localStorage.getItem(j + "-IP") + "</td><td class='text-center'>" + localStorage.getItem(j + "-port") + "</td></tr>";
+  }
+
+}
+
 function toggle_configure() {
   if (configuration_mode_on) {
     document.getElementById("btn_configure").style.display = "none";
@@ -155,6 +169,20 @@ function toggle_configure() {
     document.getElementById("btn_save").style.display = "none";
     document.getElementById("btn_reset").style.display = "none";
   }
+}
+
+function toggle_show_table() {
+  document.getElementById("btn_hide_config").style.display = "block";
+  document.getElementById("btn_show_config").style.display = "none";
+  document.getElementById("configtable").style.display = "block";
+  showing_configuration_data = true;
+}
+
+function toggle_hide_table() {
+  document.getElementById("btn_show_config").style.display = "block";
+  document.getElementById("btn_hide_config").style.display = "none";
+  document.getElementById("configtable").style.display = "none";
+  showing_configuration_data = false;
 }
 
 //Configuration Dummy Motor related functions
@@ -358,9 +386,11 @@ class VibrationMotor {
 }
 
 function scan_modules() {
+  //This loads the modules
   var htmlmessage = 'Scanning';
   show_message(htmlmessage)
   window.setTimeout(function () {
+    document.getElementById("btn_configure").style.display = "block";
     scan_complete = true;
     htmlmessage = total_number_of_modules + ' modules found.';
     show_message(htmlmessage);

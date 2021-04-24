@@ -60,8 +60,7 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbar-collapse-04">
             <ul class="nav navbar-nav">
-                <li><a href="#" onclick="scan_modules()"><span class="fui-search"></span>Edit Modules</a></li>
-
+                <!--<li><a href="#" onclick="scan_modules()"><span class="fui-search"></span>Load Modules</a></li>-->
 
                 <li id="btn_configure">
                     <a href="#" onclick="configure()">
@@ -80,6 +79,19 @@
                     <a href="#" onclick="clear_configuration()">
                         <span class="fui-cross-circle"></span>
                         Reset All
+                    </a>
+                </li>
+
+                <li id="btn_show_config">
+                    <a href="#" onclick="toggle_show_table()">
+                        <span class="fui-gear"></span>
+                        Show Configuration
+                    </a>
+                </li>
+                <li id="btn_hide_config">
+                    <a href="#" onclick="toggle_hide_table()">
+                        <span class="fui-gear"></span>
+                        Hide Configuration
                     </a>
                 </li>
 
@@ -106,7 +118,7 @@
 
     <!--Main Content Begins-->
 
-    <div class="demo-row">
+    <div class="demo-row" id="configtable">
         <div class="demo-content-wide">
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -117,12 +129,8 @@
                             <th class="text-center">Port</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td class="text-center">a</td>
-                            <td class="text-center">P</td>
-                        </tr>
+                    <tbody id="configdata">
+
                     </tbody>
                 </table>
             </div>
