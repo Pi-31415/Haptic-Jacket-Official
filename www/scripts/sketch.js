@@ -79,9 +79,6 @@ function setup() {
 
   //Render initial components
   pixelDensity(3.0);
-
-  render_config_data();
-
   createCanvas(screen_width, 600);
   jacket_img = loadImage('img/jacket.svg');
   scan_modules();
@@ -152,6 +149,7 @@ function show_message(msg) {
 function render_config_data() {
   //Renders data from configuration file onto GUI
   //render configuration file data onto GUI
+  document.getElementById("configdata").innerHTML = "";
   var j;
   for (j = 1; j <= localStorage.getItem("MaxID"); j++) {
     document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>" + localStorage.getItem(j + "-IP") + "</td><td class='text-center'>" + localStorage.getItem(j + "-port") + "</td></tr>";
@@ -172,6 +170,8 @@ function toggle_configure() {
 }
 
 function toggle_show_table() {
+
+  render_config_data();
   document.getElementById("btn_hide_config").style.display = "block";
   document.getElementById("btn_show_config").style.display = "none";
   document.getElementById("configtable").style.display = "block";
@@ -279,17 +279,43 @@ function save_configuration() {
 
 //List all configurations
 function list_configuration() {
-  for (var l = 1; l <= total_number_of_modules; l++) {
+  for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
     if (localStorage.getItem(l + "-x") != null || localStorage.getItem(l + "-y") != null) {
       console.log("Motor " + l + " : (" + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + ")");
     }
   }
 }
 
-//Clear all configurations
+//Clear all configurations, for reset button
 function clear_configuration() {
   current_dragged_module = 0;
-  localStorage.clear();
+
+  var autoID = 1;
+  var j, k;
+  var current_separator_X = 50;
+  var current_separator_Y = 50;
+  var currentY = 500;
+  var currentX = 50;
+
+  noFill();
+  stroke(20, 72, 84);
+  //Table to place unconfigured modules
+  rect(20, box_boundary_y_coordinate, 1020, 120);
+
+  //Render the motors in a rectangular array if configuration does not exist
+  for (j = 1; j <= 4; j++) {
+    for (k = 1; k <= 20; k++) {
+      if (autoID <= localStorage.getItem("MaxID")) {
+        localStorage.setItem(autoID + "-x",currentX);
+        localStorage.setItem(autoID + "-y",currentY);
+        currentX += current_separator_X;
+        autoID++;
+      }
+    }
+    currentX = 50;
+    currentY += current_separator_Y;
+  }
+
   show_message('All configuration data cleared.');
   toggle_configure();
 }
@@ -392,8 +418,7 @@ function scan_modules() {
   window.setTimeout(function () {
     document.getElementById("btn_configure").style.display = "block";
     scan_complete = true;
-    htmlmessage = total_number_of_modules + ' modules found.';
+    htmlmessage = localStorage.getItem("MaxID") + ' Modules loaded.';
     show_message(htmlmessage);
   }, 500);
 }
-
