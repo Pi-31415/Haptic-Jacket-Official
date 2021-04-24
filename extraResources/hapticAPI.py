@@ -1,6 +1,6 @@
 '''
 Author : Pi 
-Date: Mar 27, 2021
+Date: Apr 24, 2021
 Description:  This is the Haptic Jacket controller middleware API in Python
 Dependencies : socket, time, csv
 
