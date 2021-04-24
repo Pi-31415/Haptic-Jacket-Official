@@ -286,23 +286,15 @@ function list_configuration() {
   }
 }
 
-//Clear all configurations, for reset button
+//Clear all configurations, and reset motor locations for reset button
 function clear_configuration() {
   current_dragged_module = 0;
-
   var autoID = 1;
   var j, k;
   var current_separator_X = 50;
   var current_separator_Y = 50;
   var currentY = 500;
   var currentX = 50;
-
-  noFill();
-  stroke(20, 72, 84);
-  //Table to place unconfigured modules
-  rect(20, box_boundary_y_coordinate, 1020, 120);
-
-  //Render the motors in a rectangular array if configuration does not exist
   for (j = 1; j <= 4; j++) {
     for (k = 1; k <= 20; k++) {
       if (autoID <= localStorage.getItem("MaxID")) {
