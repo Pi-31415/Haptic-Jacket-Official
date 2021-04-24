@@ -46,6 +46,8 @@ npm start
 electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
 ```
 
+**Note: Copy extraResources into the release-builds folder after building**
+
 ```
 # Ubuntu Build
 npm run build:package && npm run build:snap
