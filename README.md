@@ -50,8 +50,21 @@ electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons
 
 ```
 # Ubuntu Build
+# First install
+npm install --save-dev electron-installer-snap
+```
+Then place following command in package.json
+```
+ "build:package": "electron-packager . --out=out",
+ "build:snap": "electron-installer-snap --src=out/myappname-linux-x64"
+```
+
+```
+# Finally Build
 npm run build:package && npm run build:snap
 ```
+**Don't forget to manually copy the config.csv after building**
+
 Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
 
 ## Editing Style
