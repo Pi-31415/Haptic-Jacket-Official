@@ -7,8 +7,7 @@
     "start": "electron .",
     "build": "electron-packager . --overwrite --platform=darwin --arch=all --icon=assets/icons/icon.icns --extra-resource=./extraResources/config.csv --prune=true --out=release-builds",
     "build:package": "electron-packager . --out=out",
- "build:snap": "electron-installer-snap --src=out/myappname-linux-x64"
-
+    "build:snap": "electron-installer-snap --src=out/myappname-linux-x64"
   },
   "repository": "https://github.com/Pi-31415/Haptic-Jacket-Official",
   "keywords": [
