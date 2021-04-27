@@ -63,7 +63,11 @@ Then place following command in package.json
 # Finally Build
 npm run build:package && npm run build:snap
 ```
-**Don't forget to manually copy the config.csv after building**
+**Don't forget to manually copy the config.csv after building using following commands**
+
+```
+sudo cp -r extraResources/* out/Haptic-Jacket-Controller-linux-x64
+```
 
 Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
 
