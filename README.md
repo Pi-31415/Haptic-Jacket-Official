@@ -61,7 +61,7 @@ Then place following command in package.json
 
 ```
 # Finally Build
-npm run build:package && npm run build:snap
+sudo npm run build:package && npm run build:snap
 ```
 **Don't forget to manually copy the config.csv after building using following commands**
 
