@@ -9,8 +9,9 @@ var counter = 1;
 //var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
 
 //For Ubuntu
-var input_file_path = path.join(__dirname, './', 'config.csv');
+var input_file_path = path.join(__dirname, '../../', 'config.csv');
 
+localStorage.setItem("config_file_path", input_file_path);
 
 function read_config_file(){
   //Read contents of config file

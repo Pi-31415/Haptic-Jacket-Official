@@ -79,6 +79,9 @@ function setup() {
   UDP_bind();
   //Disable GUI Buttons
   document.getElementById("btn_save").style.display = "none";
+
+  document.getElementById("configpath").innerHTML = localStorage.getItem("config_file_path");
+
   document.getElementById("btn_reset").style.display = "none";
   document.getElementById("btn_hide_config").style.display = "none";
   document.getElementById("configtable").style.display = "none";
