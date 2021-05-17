@@ -385,12 +385,12 @@ class VibrationMotor {
     //if configuration mode is off, play vibration animations with delay time, and also send UDP message to physical modules
 
     if (!configuration_mode_on) {
-      //Submit UDP message to physical Module
-      UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
-
       //Update Animations
       stroke(0, 0, 0);
       if (this.is_vibrating && this.init_y <= box_boundary_y_coordinate) {
+        //Submit UDP message to physical Module
+        UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
+
         //only play vibrate animation if configuration mode mode is off
         this.x = this.init_x;
         this.y = this.init_y;
