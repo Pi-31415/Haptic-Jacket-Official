@@ -25,11 +25,11 @@ def initiate_config():
     with open('config.csv') as f:
         reader = enumerate(csv.reader(f))
         for i, row in reader:
-            print(i, row)
+            # print(i, row)
             if i != 0:
                 current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
                 modules[i] = current_module
-    print('Done')
+    print('All modules scanned from config.csv')
 
 
 def show_modules():
