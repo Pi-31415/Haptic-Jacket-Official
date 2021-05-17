@@ -28,14 +28,16 @@ def initiate_config():
             if i != 0:
                 current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
                 modules[i] = current_module
-    print('All modules scanned from config.csv')
+    print('All modules scanned from config.csv\n\n')
 
 def show_modules():
     # Show all configuration data read from config.csv
+    print('Following modules are found in config.csv\n')
     for module_id in modules.keys():
         id = module_id
         print(id, modules[module_id]['IP'],
               modules[module_id]['PORT'])
+    print('\n\n')
 
 def send_UDP_message(message,physical_module_ip,physical_module_port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Internet  # UDP
