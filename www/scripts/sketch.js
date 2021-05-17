@@ -12,7 +12,6 @@ var HOST = '127.0.0.1';
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
 
-
 function UDP_bind() {
   server.on('listening', function () {
     var address = server.address();
