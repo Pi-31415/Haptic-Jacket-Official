@@ -75,6 +75,12 @@ sudo npm run build:package && npm run build:snap
 sudo cp -r extraResources/* out/Haptic-Jacket-Controller-linux-x64
 ```
 
+
+After Building on linux, change permission for the build folder using
+```bash
+sudo chmod -R 777 out
+```
+
 Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
 
 ## Editing Style
