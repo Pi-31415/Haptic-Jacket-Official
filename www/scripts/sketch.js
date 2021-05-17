@@ -32,11 +32,12 @@ function UDP_bind() {
   server.bind(PORT, HOST);
 }
 
-function UDP_send(MESSAGE,PORT,HOST){
+function UDP_send(MESSAGE, PORT, HOST) {
   var message = new Buffer.from(MESSAGE);
-  client.send(message, 0, message.length, PORT, HOST, function(err, bytes) {
+  var client = dgram.createSocket('udp4');
+  client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
     if (err) throw err;
-    console.log('UDP message sent to ' + HOST +':'+ PORT);
+    console.log('UDP message sent to ' + HOST + ':' + PORT);
     client.close();
   });
 }
@@ -306,8 +307,8 @@ function clear_configuration() {
   for (j = 1; j <= 4; j++) {
     for (k = 1; k <= 20; k++) {
       if (autoID <= localStorage.getItem("MaxID")) {
-        localStorage.setItem(autoID + "-x",currentX);
-        localStorage.setItem(autoID + "-y",currentY);
+        localStorage.setItem(autoID + "-x", currentX);
+        localStorage.setItem(autoID + "-y", currentY);
         currentX += current_separator_X;
         autoID++;
       }
@@ -381,8 +382,13 @@ class VibrationMotor {
         this.is_vibrating = true;
       }
     }
-    //if configuration mode is off, play vibration animations with delay time
+    //if configuration mode is off, play vibration animations with delay time, and also send UDP message to physical modules
+
     if (!configuration_mode_on) {
+      //Submit UDP message to physical Module
+      UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
+
+      //Update Animations
       stroke(0, 0, 0);
       if (this.is_vibrating && this.init_y <= box_boundary_y_coordinate) {
         //only play vibrate animation if configuration mode mode is off
