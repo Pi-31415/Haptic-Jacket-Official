@@ -18,7 +18,6 @@ modules = {}
 GUI_IP = "127.0.0.1"
 GUI_PORT = 33333
 
-
 def initiate_config():
     # Read the contents of config.csv and read it into dictionary
     # This dictionary is for communicating with physical modules
@@ -31,14 +30,12 @@ def initiate_config():
                 modules[i] = current_module
     print('All modules scanned from config.csv')
 
-
 def show_modules():
     # Show all configuration data read from config.csv
     for module_id in modules.keys():
         id = module_id
         print(id, modules[module_id]['IP'],
               modules[module_id]['PORT'])
-
 
 def send_UDP_message(message,physical_module_ip,physical_module_port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Internet  # UDP
@@ -52,13 +49,11 @@ def activate_motor(module_id):
     send_UDP_message(COMMAND,modules[module_id]['IP'],modules[module_id]['PORT'])
     print("Motor %s Activated" % module_id)
 
-
 def stop_all_motors():
     COMMAND = bytes('0', 'utf-8')
     for module_id in modules.keys():
         send_UDP_message(COMMAND,modules[module_id]['IP'],modules[module_id]['PORT'])
     print("All Motors Stopped")
-
 
 def continuous_motion(delay_time):
     x = 1
@@ -70,7 +65,6 @@ def continuous_motion(delay_time):
         x += 1
         if(x > len(modules)):
             x = 1
-
 
 def delay(delay_time):
     sleep(delay_time)

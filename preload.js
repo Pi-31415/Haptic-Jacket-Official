@@ -43,12 +43,11 @@ window.addEventListener('DOMContentLoaded', () => {
     var stream = fs.createWriteStream(input_file_path);
     stream.once('open', function (fd) {
       stream.write("ID,IP,PORT\n");
-      stream.write("1,102.87.192.93,7777\n");
-      stream.write("2,154.204.118.69,7777\n");
-      stream.write("3,174.249.227.92,7777\n");
-      stream.write("4,69.238.204.57,7777\n");
-      stream.write("5,120.151.177.61,7777\n");
-      stream.write("6,81.197.31.110,7777\n");
+      stream.write("1,225.0.0.208,7777\n");
+      stream.write("2,226.0.0.208,7777\n");
+      stream.write("3,227.0.0.208,7777\n");
+      stream.write("4,228.0.0.208,7777\n");
+      stream.write("5,229.0.0.208,7777\n");
       stream.end();
     });
     read_config_file();
