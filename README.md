@@ -44,12 +44,12 @@ npm start
 
 ```bash
 # Mac Build
-electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
+sudo electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
 ```
 
 After Building on mac, change permission for the build folder using
 ```bash
-chmod -R 777 release-builds
+sudo chmod -R 777 release-builds
 ```
 
 **Note: Copy extraResources into the release-builds folder after building**
