@@ -32,6 +32,15 @@ function UDP_bind() {
   server.bind(PORT, HOST);
 }
 
+function UDP_send(MESSAGE,PORT,HOST){
+  var message = new Buffer.from(MESSAGE);
+  client.send(message, 0, message.length, PORT, HOST, function(err, bytes) {
+    if (err) throw err;
+    console.log('UDP message sent to ' + HOST +':'+ PORT);
+    client.close();
+  });
+}
+
 // GUI related variables
 let jacket_img;
 var configuration_mode_on = false;
@@ -350,6 +359,7 @@ class VibrationMotor {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
       this.is_vibrating = true;
+
 
       //console.log('current drag ID: ' + current_dragged_module);
 
