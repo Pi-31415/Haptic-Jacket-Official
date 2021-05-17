@@ -4,7 +4,12 @@ var fs = require('fs');
 var path = require('path');
 const csv = require('csv-parser');
 var counter = 1;
-var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
+
+//For MacOS
+//var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
+
+//For Ubuntu
+var input_file_path = path.join(__dirname, './', 'config.csv');
 
 
 function read_config_file(){

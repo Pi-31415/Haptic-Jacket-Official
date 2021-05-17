@@ -42,6 +42,9 @@ npm start
 
 ## Building Commands
 
+IMPORTANT: Uncomment File Path in preload.js before building
+
+
 ```bash
 # Mac Build
 sudo electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
@@ -56,6 +59,8 @@ sudo chmod -R 777 release-builds
 
 ```
 # Ubuntu Build
+
+IMPORTANT: Uncomment File Path in preload.js before building
 
 # First install electron and installer
 
