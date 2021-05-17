@@ -56,7 +56,11 @@ chmod -R 777 release-builds
 
 ```
 # Ubuntu Build
-# First install
+
+# First install electron and installer
+
+npm i --save-dev electron
+
 npm install --save-dev electron-installer-snap
 ```
 Then place following command in package.json
