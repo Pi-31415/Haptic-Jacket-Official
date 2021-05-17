@@ -8,6 +8,7 @@ Documentation [on Gitbook](https://pi31415.gitbook.io/haptic-jacket/)
 
 - [UDP-Client-Server-Test](https://github.com/Pi-31415/UDP-Client-Server-Test)
 - [Haptic-Jacket-API-GUI](https://github.com/Pi-31415/Haptic-Jacket-API-GUI)
+- [Flutter-UDP-Client-Android](https://github.com/Pi-31415/Flutter-UDP-Client-Android)
 
 ## Requirements
 
