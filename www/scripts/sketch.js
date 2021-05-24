@@ -25,7 +25,7 @@ function UDP_bind() {
       UDP_motorid = [0]
     } else {
       UDP_motorid.push(Number(message));
-      console.log(UDP_motorid);
+      console.log("Message Received:"+message);
     }
   });
 
@@ -351,7 +351,7 @@ class VibrationMotor {
   API_activate(duration) {
     this.API_activated = true;
     this.delay_time = duration;
-    console.log(this.delay_time);
+    //console.log(this.delay_time);
   }
   activate() {
 
@@ -400,7 +400,7 @@ class VibrationMotor {
       stroke(0, 0, 0);
       if (this.is_vibrating && this.init_y <= box_boundary_y_coordinate) {
         //Submit UDP message to physical Module
-        UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
+        //UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
 
         //only play vibrate animation if configuration mode mode is off
         this.x = this.init_x;
