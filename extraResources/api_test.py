@@ -9,6 +9,6 @@ hapticAPI.show_modules()
 
 
 hapticAPI.activate_motor(1,90,5000)
-hapticAPI.activate_motor(2,100,5000)
+hapticAPI.activate_motor(1,100,5000)
 hapticAPI.activate_motor(1,80,5000)
 
