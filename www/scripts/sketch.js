@@ -352,13 +352,20 @@ class VibrationMotor {
     this.API_activated = true;
   }
   activate() {
-    //Activate via mouse hover or API call
+
+    /*
+    Mouse hover sensing code, replace if statement below
     if (
       (mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
         mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
         mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
         mouseY <= this.init_y + (this.diameter * this.sensitivity))
       || (this.API_activated)
+    ) {
+    */
+    //Activate via API call only
+    if (
+      (this.API_activated)
     ) {
       //Activate Vibration for a duration
       motorDelayTimes[this.ID] = Math.floor(millis());
