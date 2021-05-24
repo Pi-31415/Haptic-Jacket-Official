@@ -33,7 +33,7 @@ def initiate_config():
             if i != 0:
                 current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
                 modules[i] = current_module
-    print('All modules scanned from config.csv\n\n')
+    print('All modules scanned from config.csv\n')
 
 
 def show_modules():
@@ -43,7 +43,7 @@ def show_modules():
         id = module_id
         print(id, modules[module_id]['IP'],
               modules[module_id]['PORT'])
-    print('\n\n')
+    print('\n')
 
 
 def send_UDP_message(message, physical_module_ip, physical_module_port):
