@@ -12,8 +12,9 @@ var HOST = '127.0.0.1';
 
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
-var current_delay_time = 0;
-var current_intensity = 0;
+
+var delay_times = [];
+var intensities = [];
 
 function UDP_bind() {
   server.on('listening', function () {
@@ -29,8 +30,8 @@ function UDP_bind() {
     } else {
       var splitted_message = message.toString().split(",");
       UDP_motorid.push(Number(splitted_message[0]));
-      current_intensity = Number(splitted_message[1]);
-      current_delay_time = Number(splitted_message[2]);
+      intensities[Number(splitted_message[0])] = Number(splitted_message[1]);
+      delay_times[Number(splitted_message[0])] = Number(splitted_message[2]);
       console.log("Message Received:" + message);
     }
   });
@@ -134,7 +135,7 @@ function draw() {
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
-          motorGUI[UDP_motorid[y]].API_activate(current_delay_time,current_intensity);
+          motorGUI[UDP_motorid[y]].API_activate(delay_times[UDP_motorid[y]],intensities[UDP_motorid[y]]);
           //Activation occurs here
         }
       }
@@ -353,7 +354,7 @@ class VibrationMotor {
     this.init_y = Y;
     this.diameter = 20;
     this.speed = 2;
-    this.intensity = 3;
+    this.max_pixel_vibration_animation = 3;
     this.sensitivity = 1;
     this.delay_time = 300; //Default delay time
     this.ID = autoID;
@@ -374,6 +375,7 @@ class VibrationMotor {
 
     //Calculate the intensity color (100 = reddest, 0 = white)
     var normalized_color = Math.floor(-(2.55*intensity) + 255);
+    this.max_pixel_vibration_animation = 4*(intensity/100);
     
     this.color_vibrating = color(255,normalized_color,normalized_color);
     //console.log(this.delay_time);
@@ -442,8 +444,8 @@ class VibrationMotor {
         //only play vibrate animation if configuration mode mode is off
         this.x = this.init_x;
         this.y = this.init_y;
-        this.x += random(-this.intensity, this.intensity);
-        this.y += random(-this.intensity, this.intensity);
+        this.x += random(-this.max_pixel_vibration_animation, this.max_pixel_vibration_animation);
+        this.y += random(-this.max_pixel_vibration_animation, this.max_pixel_vibration_animation);
         fill(this.color_vibrating);
         ellipse(this.x, this.y, this.diameter, this.diameter);
         fill(color(0, 0, 0))

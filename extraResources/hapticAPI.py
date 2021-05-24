@@ -44,12 +44,13 @@ def send_UDP_message(message,physical_module_ip,physical_module_port):
     # Send the UDP message to GUI Application first, for visualization
     sock.sendto(message, (GUI_IP, GUI_PORT))
     # Then send the message to actual physical modules (0 is off, and anything apart from 0 is on)
+    # Parse
     sock.sendto(message, (physical_module_ip, physical_module_port))
 
 def activate_motor(module_id,intensity,duration):
     COMMAND = bytes(str(module_id)+","+str(intensity)+","+str(duration), 'utf-8')
     send_UDP_message(COMMAND,modules[module_id]['IP'],modules[module_id]['PORT'])
-    print("Motor %s Activated" % module_id)
+    print("Motor {0} Activated at {1} percent intensity for {2} milliseconds".format(module_id,intensity,duration))
 
 def stop_all_motors():
     COMMAND = bytes('0', 'utf-8')
@@ -69,4 +70,4 @@ def continuous_motion(delay_time):
             x = 1
 
 def delay(delay_time):
-    sleep(delay_time)
+    sleep(delay_time/1000)
