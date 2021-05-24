@@ -8,6 +8,7 @@ hapticAPI.show_modules()
 # hapticAPI.delay(Duration in milliseconds)
 
 
-hapticAPI.activate_motor(1, 90, 5000)
-hapticAPI.activate_motor(1, 100, 5000)
-hapticAPI.activate_motor(1, 80, 5000)
+hapticAPI.activate_motor(1, 100, 4000)
+hapticAPI.activate_motor(3, 60, 7000)
+hapticAPI.delay(11000)
+hapticAPI.activate_motor(4, 30, 3000)
