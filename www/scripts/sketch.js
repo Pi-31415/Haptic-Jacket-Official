@@ -12,6 +12,8 @@ var HOST = '127.0.0.1';
 
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
+var current_delay_time = 0;
+var current_intensity = 0;
 
 function UDP_bind() {
   server.on('listening', function () {
@@ -25,9 +27,10 @@ function UDP_bind() {
       //Stop if the incoming UDP message is 0
       UDP_motorid = [0]
     } else {
-
-      Number(message);
-      UDP_motorid.push(1);
+      var splitted_message = message.toString().split(",");
+      UDP_motorid.push(Number(splitted_message[0]));
+      current_intensity = Number(splitted_message[1]);
+      current_delay_time = Number(splitted_message[2]);
       console.log("Message Received:" + message);
     }
   });
@@ -131,7 +134,7 @@ function draw() {
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
-          motorGUI[UDP_motorid[y]].API_activate(500,22);
+          motorGUI[UDP_motorid[y]].API_activate(current_delay_time,current_intensity);
           //Activation occurs here
         }
       }
