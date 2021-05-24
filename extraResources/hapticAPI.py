@@ -46,8 +46,8 @@ def send_UDP_message(message,physical_module_ip,physical_module_port):
     # Then send the message to actual physical modules (0 is off, and anything apart from 0 is on)
     sock.sendto(message, (physical_module_ip, physical_module_port))
 
-def activate_motor(module_id):
-    COMMAND = bytes(str(module_id), 'utf-8')
+def activate_motor(module_id,intensity,duration):
+    COMMAND = bytes(str(module_id)+","+str(intensity)+","+str(duration), 'utf-8')
     send_UDP_message(COMMAND,modules[module_id]['IP'],modules[module_id]['PORT'])
     print("Motor %s Activated" % module_id)
 
