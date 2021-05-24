@@ -9,6 +9,7 @@
 var PORT = 33333;
 var UDP_motorid = [];
 var HOST = '127.0.0.1';
+
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
 
@@ -24,7 +25,9 @@ function UDP_bind() {
       //Stop if the incoming UDP message is 0
       UDP_motorid = [0]
     } else {
-      UDP_motorid.push(Number(message));
+
+      Number(message);
+      UDP_motorid.push(1);
       console.log("Message Received:" + message);
     }
   });
@@ -128,7 +131,7 @@ function draw() {
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
-          motorGUI[UDP_motorid[y]].API_activate(500);
+          motorGUI[UDP_motorid[y]].API_activate(500,22);
           //Activation occurs here
         }
       }
@@ -353,7 +356,7 @@ class VibrationMotor {
     this.ID = autoID;
     this.is_vibrating = false;
     //Color scheme
-    this.color_vibrating = color(33, 218, 189); //Torquise
+    this.color_vibrating = color(255, 255, 255); //Torquise
     this.color_non_vibration = color(19, 68, 92); //Grey
     //API calls
     this.API_activated = false;
@@ -362,9 +365,14 @@ class VibrationMotor {
     this.init_x = x;
     this.init_y = y;
   }
-  API_activate(duration) {
+  API_activate(duration,intensity) {
     this.API_activated = true;
     this.delay_time = duration;
+
+    //Calculate the intensity color (100 = reddest, 0 = white)
+    var normalized_color = Math.floor(-(2.55*intensity) + 255);
+    
+    this.color_vibrating = color(255,normalized_color,normalized_color);
     //console.log(this.delay_time);
   }
   activate() {
@@ -405,10 +413,7 @@ class VibrationMotor {
     var delayed_time = 10000000;
     if (motorDelayTimes[this.ID] != undefined) {
       delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
-      console.log('DELAYED TIME ' + delayed_time);
-
-
-      //Stop vibrating the motor after a delay time
+      //Stop vibrating the motor after the specified delay time
       if (motorDelayTimes[this.ID] > 0) {
         if (delayed_time >= this.delay_time) {
           this.API_activated = false;
