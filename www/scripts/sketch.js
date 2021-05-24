@@ -74,6 +74,19 @@ function preload() {
   myFont = loadFont("./fonts/lato/lato-light.ttf");
 }
 
+
+function removeItemAll(arr, value) {
+  var i = 0;
+  while (i < arr.length) {
+    if (arr[i] === value) {
+      arr.splice(i, 1);
+    } else {
+      ++i;
+    }
+  }
+  return arr;
+}
+
 function setup() {
   textFont(myFont);
   UDP_bind();
@@ -115,7 +128,8 @@ function draw() {
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
-          motorGUI[UDP_motorid[y]].API_activate(1000);
+          motorGUI[UDP_motorid[y]].API_activate(500);
+          //Activation occurs here
         }
       }
       motorGUI[l].activate();
@@ -335,7 +349,7 @@ class VibrationMotor {
     this.speed = 2;
     this.intensity = 3;
     this.sensitivity = 1;
-    this.delay_time = 300;
+    this.delay_time = 300; //Default delay time
     this.ID = autoID;
     this.is_vibrating = false;
     //Color scheme
@@ -400,6 +414,7 @@ class VibrationMotor {
           this.API_activated = false;
           this.is_vibrating = false;
           motorDelayTimes[this.ID] = undefined;
+          removeItemAll(UDP_motorid,this.ID);
           //alert("Yes");
         }
         else {
