@@ -365,7 +365,7 @@ class VibrationMotor {
     ) {
 
 
-      
+
 
       //Activate Vibration for a duration only if API is called, not mouse
       if (this.API_activated) {
@@ -386,17 +386,25 @@ class VibrationMotor {
       }
 
     }
-    var delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
-    console.log(delayed_time);
 
-    //Stop vibrating the motor after a delay time
-    if (motorDelayTimes[this.ID] > 0) {
-      if (delayed_time == 0) {
-        this.is_vibrating = false;
-        motorDelayTimes[this.ID] = undefined;
-      }
-      else {
-        this.is_vibrating = true;
+
+    var delayed_time = 10000000;
+    if (motorDelayTimes[this.ID] != undefined) {
+      delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
+      console.log('DELAYED TIME ' + delayed_time);
+
+
+      //Stop vibrating the motor after a delay time
+      if (motorDelayTimes[this.ID] > 0) {
+        if (delayed_time >= this.delay_time) {
+          this.API_activated = false;
+          this.is_vibrating = false;
+          motorDelayTimes[this.ID] = undefined;
+          //alert("Yes");
+        }
+        else {
+          this.is_vibrating = true;
+        }
       }
     }
     //if configuration mode is off, play vibration animations with delay time, and also send UDP message to physical modules
