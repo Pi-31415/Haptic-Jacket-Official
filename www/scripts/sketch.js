@@ -365,13 +365,15 @@ class VibrationMotor {
     ) {
 
 
+      console.log(motorDelayTimes[this.ID]);
+
       //Activate Vibration for a duration only if API is called, not mouse
       if (this.API_activated) {
-        motorDelayTimes[this.ID] = Math.floor(millis());
+        
+        //motorDelayTimes[this.ID] = Math.floor(millis());
+
         this.is_vibrating = true;
       }
-
-
 
       //Allow Dragging if locked
       //console.log('current drag ID: ' + current_dragged_module);
@@ -383,11 +385,12 @@ class VibrationMotor {
 
     }
     var delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
+    //console.log(delayed_time);
+
     //Stop vibrating the motor after a delay time
     if (motorDelayTimes[this.ID] > 0) {
-      if (delayed_time > this.delay_time) {
+      if (delayed_time == 0) {
         this.is_vibrating = false;
-        delayed_time = this.delay_time;
       }
       else {
         this.is_vibrating = true;
