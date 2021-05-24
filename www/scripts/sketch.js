@@ -353,8 +353,7 @@ class VibrationMotor {
   }
   activate() {
 
-    /*
-    Mouse hover sensing code, replace if statement below
+    //Activate via API call only
     if (
       (mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
         mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
@@ -362,18 +361,18 @@ class VibrationMotor {
         mouseY <= this.init_y + (this.diameter * this.sensitivity))
       || (this.API_activated)
     ) {
-    */
-    //Activate via API call only
-    if (
-      (this.API_activated)
-    ) {
-      //Activate Vibration for a duration
-      motorDelayTimes[this.ID] = Math.floor(millis());
-      this.is_vibrating = true;
 
 
+      //Activate Vibration for a duration only if API is called, not mouse
+      if (this.API_activated) {
+        motorDelayTimes[this.ID] = Math.floor(millis());
+        this.is_vibrating = true;
+      }
+
+
+
+      //Allow Dragging if locked
       //console.log('current drag ID: ' + current_dragged_module);
-
       if (!locked && configuration_mode_on) {
         current_dragged_module = this.ID;
         bx = motorGUI[current_dragged_module].init_x;

@@ -50,12 +50,16 @@ IMPORTANT: Uncomment File Path in preload.js before building
 sudo electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
 ```
 
+**Note: Copy extraResources into the release-builds folder after building using the following**
+
+```
+sudo cp -R ./extraResources/ ./release-builds/Haptic-Jacket-Controller-darwin-x64
+```
+
 After Building on mac, change permission for the build folder using
 ```bash
 sudo chmod -R 777 release-builds
 ```
-
-**Note: Copy extraResources into the release-builds folder after building**
 
 ```
 # Ubuntu Build
