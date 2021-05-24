@@ -115,7 +115,7 @@ function draw() {
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
-          motorGUI[UDP_motorid[y]].API_activated = true;
+          motorGUI[UDP_motorid[y]].API_activate(1000);
         }
       }
       motorGUI[l].activate();
@@ -350,6 +350,8 @@ class VibrationMotor {
   }
   API_activate(duration) {
     this.API_activated = true;
+    this.delay_time = duration;
+    console.log(this.delay_time);
   }
   activate() {
 
