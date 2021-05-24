@@ -18,6 +18,9 @@ modules = {}
 GUI_IP = "127.0.0.1"
 GUI_PORT = 33333
 
+def delay(delay_time):
+    sleep(delay_time/1000)
+    
 def initiate_config():
     # Read the contents of config.csv and read it into dictionary
     # This dictionary is for communicating with physical modules
@@ -48,7 +51,7 @@ def send_UDP_message(message,physical_module_ip,physical_module_port):
     sock.sendto(message, (physical_module_ip, physical_module_port))
 
 def activate_motor(module_id,intensity,duration):
-    delay(200) # Delay a bit not to lap UDP commands
+    delay(200) # Delay a bit not to lap UDP commands, past UDP commands are overwritten, if module reveives new one
     COMMAND = bytes(str(module_id)+","+str(intensity)+","+str(duration), 'utf-8')
     send_UDP_message(COMMAND,modules[module_id]['IP'],modules[module_id]['PORT'])
     print("Motor {0} Activated at {1} percent intensity for {2} milliseconds".format(module_id,intensity,duration))
@@ -69,6 +72,3 @@ def continuous_motion(delay_time):
         x += 1
         if(x > len(modules)):
             x = 1
-
-def delay(delay_time):
-    sleep(delay_time/1000)
