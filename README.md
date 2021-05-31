@@ -61,13 +61,15 @@ After Building on mac, change permission for the build folder using
 sudo chmod -R 777 release-builds
 ```
 
-```
 # Ubuntu Build
+
+
 
 IMPORTANT: Uncomment File Path in preload.js before building
 
 # First install electron and installer
 
+```
 npm i --save-dev electron
 
 npm install --save-dev electron-installer-snap
