@@ -96,8 +96,17 @@ sudo chmod -R 777 out
 
 Then compress into tar
 ```
-tar -czvf out/Haptic-Jacket-Controller-linux-x64.tar.gz out/Haptic-Jacket-Controller-linux-x64
+cd out
+tar -czvf Haptic-Jacket-Controller-linux-x64.tar.gz Haptic-Jacket-Controller-linux-x64
 ```
+
+
+After Building on linux, change permission for the build folder using
+```bash
+cd ..
+sudo chmod -R 777 out
+```
+
 
 Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
 
