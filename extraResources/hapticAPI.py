@@ -29,8 +29,9 @@ def initiate_config():
         for i, row in reader:
             # print(i, row)
             if i != 0:
-                current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
-                modules[i] = current_module
+                if (len(str(row[1])) >= 1):
+                    current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
+                    modules[i] = current_module
     print('All modules scanned from config.csv\n')
 
 def show_modules():
@@ -48,7 +49,7 @@ def send_UDP_message(message, physical_module_ip, physical_module_port,INTENSITY
     sock.sendto(message, (GUI_IP, GUI_PORT))
     # Then send the message to actual physical modules (0 is off, and anything apart from 0 is on)
     physical_message = bytes(str(INTENSITY) + ","+str(DURATION),'utf-8')
-    sock.sendto(physical_message, (physical_module_ip, physical_module_port))
+    # sock.sendto(physical_message, (physical_module_ip, physical_module_port))
 
 def activate_motor(module_id, intensity, duration):
     delay(200)  # Delay a bit not to lap UDP commands, past UDP commands are overwritten, if module reveives new one

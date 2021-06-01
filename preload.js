@@ -13,17 +13,19 @@ var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
 
 localStorage.setItem("config_file_path", input_file_path);
 
-function read_config_file(){
+function read_config_file() {
   //Read contents of config file
   fs.createReadStream(input_file_path)
     .pipe(csv())
     .on('data', function (data) {
       try {
-        //perform the operation of reading into memory
-        localStorage.setItem(counter + "-IP", data.IP);
-        localStorage.setItem(counter + "-port", data.PORT);
-        counter++;
-        localStorage.setItem("MaxID", counter - 1);
+        if (data.IP != undefined) {
+          //perform the operation of reading into memory
+          localStorage.setItem(counter + "-IP", data.IP);
+          localStorage.setItem(counter + "-port", data.PORT);
+          counter++;
+          localStorage.setItem("MaxID", counter - 1);
+        }
       }
       catch (err) {
         //error handler

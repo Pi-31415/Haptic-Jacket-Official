@@ -135,7 +135,7 @@ function draw() {
       //listen to UDP and activate accordingly;
       for (var y = 0; y < UDP_motorid.length; y++) {
         if (UDP_motorid[y] != 0 && UDP_motorid[y] < motorGUI.length) {
-          motorGUI[UDP_motorid[y]].API_activate(delay_times[UDP_motorid[y]],intensities[UDP_motorid[y]]);
+          motorGUI[UDP_motorid[y]].API_activate(delay_times[UDP_motorid[y]], intensities[UDP_motorid[y]]);
           //Activation occurs here
         }
       }
@@ -364,20 +364,21 @@ class VibrationMotor {
     this.color_non_vibration = color(19, 68, 92); //Grey
     //API calls
     this.API_activated = false;
+    this.current_activation_time = 0.0;
   }
   move(x, y) {
     this.init_x = x;
     this.init_y = y;
   }
-  API_activate(duration,intensity) {
+  API_activate(duration, intensity) {
     this.API_activated = true;
     this.delay_time = duration;
 
     //Calculate the intensity color (100 = reddest, 0 = white)
-    var normalized_color = Math.floor(-(2.55*intensity) + 255);
-    this.max_pixel_vibration_animation = 4*(intensity/100);
-    
-    this.color_vibrating = color(255,normalized_color,normalized_color);
+    var normalized_color = Math.floor(-(2.55 * intensity) + 255);
+    this.max_pixel_vibration_animation = 4 * (intensity / 100);
+
+    this.color_vibrating = color(255, normalized_color, normalized_color);
     //console.log(this.delay_time);
   }
   activate() {
@@ -391,13 +392,16 @@ class VibrationMotor {
       || (this.API_activated)
     ) {
 
-
-
-
       //Activate Vibration for a duration only if API is called, not mouse
-      if (this.API_activated) {
+      if ((mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
+        mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
+        mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
+        mouseY <= this.init_y + (this.diameter * this.sensitivity))
+        || this.API_activated) {
         if (motorDelayTimes[this.ID] == undefined) {
           motorDelayTimes[this.ID] = Math.floor(millis());
+          //Keep time to generate one command only to physical module;
+          this.current_activation_time = Math.floor(millis());
           this.is_vibrating = true;
         }
       }
@@ -424,7 +428,7 @@ class VibrationMotor {
           this.API_activated = false;
           this.is_vibrating = false;
           motorDelayTimes[this.ID] = undefined;
-          removeItemAll(UDP_motorid,this.ID);
+          removeItemAll(UDP_motorid, this.ID);
           //alert("Yes");
         }
         else {
@@ -439,7 +443,12 @@ class VibrationMotor {
       stroke(0, 0, 0);
       if (this.is_vibrating && this.init_y <= box_boundary_y_coordinate) {
         //Submit UDP message to physical Module
-        //UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
+
+        if (this.current_activation_time == Math.floor(millis())) {
+          //console.log(this.current_activation_time);
+          //console.log(Math.floor(millis()));
+          UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
+        }
 
         //only play vibrate animation if configuration mode mode is off
         this.x = this.init_x;
