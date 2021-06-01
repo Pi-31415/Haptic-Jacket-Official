@@ -63,9 +63,7 @@ sudo chmod -R 777 release-builds
 
 # Ubuntu Build
 
-
-
-IMPORTANT: Uncomment File Path in preload.js before building
+IMPORTANT: Uncomment File Path in preload.js before building, and build in sudo mode
 
 # First install electron and installer
 
@@ -94,6 +92,11 @@ sudo cp -r extraResources/* out/Haptic-Jacket-Controller-linux-x64
 After Building on linux, change permission for the build folder using
 ```bash
 sudo chmod -R 777 out
+```
+
+Then compress into tar
+```
+tar -czvf out/Haptic-Jacket-Controller-linux-x64.tar.gz out/Haptic-Jacket-Controller-linux-x64
 ```
 
 Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
