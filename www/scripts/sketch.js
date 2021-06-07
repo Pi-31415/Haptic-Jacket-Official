@@ -352,7 +352,7 @@ class VibrationMotor {
     this.y = Y;
     this.init_x = X;
     this.init_y = Y;
-    this.diameter = 20;
+    this.diameter = 35;
     this.speed = 2;
     this.max_pixel_vibration_animation = 3;
     this.sensitivity = 1;
@@ -444,8 +444,9 @@ class VibrationMotor {
         //UDP command to physical module
         //Submit UDP message to physical Module based on mouse activity
 
-        console.log(this.current_activation_time);
-        console.log(millis());
+        //console.log(this.current_activation_time);
+        //console.log(millis());
+        
         if ((mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
           mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
           mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
