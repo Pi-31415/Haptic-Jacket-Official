@@ -6,10 +6,10 @@ const csv = require('csv-parser');
 var counter = 1;
 
 //For MacOS
-// var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
+var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
 
 //For Ubuntu
-var input_file_path = path.join(__dirname, '../../', 'config.csv');
+//var input_file_path = path.join(__dirname, '../../', 'config.csv');
 
 localStorage.setItem("config_file_path", input_file_path);
 

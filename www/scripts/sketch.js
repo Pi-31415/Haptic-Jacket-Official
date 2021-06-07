@@ -44,7 +44,7 @@ function UDP_send(MESSAGE, PORT, HOST) {
   var client = dgram.createSocket('udp4');
   client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
     if (err) throw err;
-    console.log('UDP message sent to ' + HOST + ':' + PORT);
+    console.log('UDP message ' + MESSAGE + ' sent to ' + HOST + ':' + PORT);
     client.close();
   });
 }
@@ -401,7 +401,7 @@ class VibrationMotor {
         if (motorDelayTimes[this.ID] == undefined) {
           motorDelayTimes[this.ID] = Math.floor(millis());
           //Keep time to generate one command only to physical module;
-          this.current_activation_time = Math.floor(millis());
+          this.current_activation_time = millis();
           this.is_vibrating = true;
         }
       }
@@ -418,7 +418,6 @@ class VibrationMotor {
 
     }
 
-
     var delayed_time = 10000000;
     if (motorDelayTimes[this.ID] != undefined) {
       delayed_time = Math.floor(millis() - motorDelayTimes[this.ID]);
@@ -429,26 +428,35 @@ class VibrationMotor {
           this.is_vibrating = false;
           motorDelayTimes[this.ID] = undefined;
           removeItemAll(UDP_motorid, this.ID);
-          //alert("Yes");
         }
         else {
           this.is_vibrating = true;
         }
       }
     }
-    //if configuration mode is off, play vibration animations with delay time, and also send UDP message to physical modules
 
+    //if configuration mode is off, play vibration animations with delay time
     if (!configuration_mode_on) {
       //Update Animations
       stroke(0, 0, 0);
       if (this.is_vibrating && this.init_y <= box_boundary_y_coordinate) {
-        //Submit UDP message to physical Module
 
-        if (this.current_activation_time == Math.floor(millis())) {
-          //console.log(this.current_activation_time);
-          //console.log(Math.floor(millis()));
+        //UDP command to physical module
+        //Submit UDP message to physical Module based on mouse activity
+
+        console.log(this.current_activation_time);
+        console.log(millis());
+        if ((mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
+          mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
+          mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
+          mouseY <= this.init_y + (this.diameter * this.sensitivity))) {
           UDP_send('1', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
+          //console.log("Vibrating");
+        } else {
+          UDP_send('0', localStorage.getItem(this.ID + "-port"), localStorage.getItem(this.ID + "-IP"));
+          //console.log("Not Vibrating");
         }
+
 
         //only play vibrate animation if configuration mode mode is off
         this.x = this.init_x;
@@ -474,6 +482,7 @@ class VibrationMotor {
         text(this.ID, this.init_x - 2, this.init_y - 20);
       }
     }
+
   }
 }
 
