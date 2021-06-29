@@ -446,7 +446,7 @@ class VibrationMotor {
 
         //console.log(this.current_activation_time);
         //console.log(millis());
-        
+
         if ((mouseX >= this.init_x - (this.diameter * this.sensitivity) &&
           mouseX <= this.init_x + (this.diameter * this.sensitivity) &&
           mouseY >= this.init_y - (this.diameter * this.sensitivity) &&
@@ -494,7 +494,12 @@ function scan_modules() {
   window.setTimeout(function () {
     document.getElementById("btn_configure").style.display = "block";
     scan_complete = true;
-    htmlmessage = localStorage.getItem("MaxID") + ' Modules loaded.';
+    if (localStorage.getItem("MaxID") == null) {
+      alert("Configuration CSV file not found.");
+      htmlmessage = 'Error: Configuration CSV file not found.';
+    } else {
+      htmlmessage = localStorage.getItem("MaxID") + ' Modules loaded.';
+    }
     show_message(htmlmessage);
   }, 500);
 }
