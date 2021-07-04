@@ -11,8 +11,6 @@ mp_selfie_segmentation = mp.solutions.selfie_segmentation
 # Location of the Modules, and Jacket Outline
 modules_x = [400,500,600,700,800,350,500,600,700,850,300,500,600,700,900,250,500,600,700,950]
 modules_y = [200,200,200,200,200,300,300,300,300,300,400,400,400,400,400,500,500,500,500,500]
-jacket_shape_start = [(150,550),(1050,550),(750,250),(450,250),(150,550),(900,550),(450,250),(750,250),(450,550),(350,150)]
-jacket_shape_end = [(350,150),(850,150),(900,550),(300,550),(300,550),(1050,550),(450,550),(750,550),(750,550),(850,150)]
 
 # Module Class
 class Module:
@@ -118,10 +116,6 @@ with mp_hands.Hands(
                     module.append(Module(index, True, 30, modules_x[x], modules_y[x]))
                     module[x].show(image, x_coordinate, y_coordinate)
                 
-                #Draw Lines
-                for x in range(len(jacket_shape_start)):
-                    image = cv2.line(image, jacket_shape_start[x], jacket_shape_end[x], color, thickness,cv2.LINE_AA)
-
         else:
             text = "No finger Detected"
             coordinates = (30, 50)
