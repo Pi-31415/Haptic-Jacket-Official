@@ -42,6 +42,7 @@ npm start
 
 ## Building Commands
 
+Or just run macbuild.sh
 
 ```bash
 # Mac Build
