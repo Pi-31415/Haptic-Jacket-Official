@@ -146,8 +146,6 @@ function draw() {
 
   }
 
-
-
   //Configuration Motor Dummy
   // Test if the cursor is over the box
   if (
@@ -187,25 +185,25 @@ function render_config_data() {
   document.getElementById("configdata").innerHTML = "";
   var j;
   for (j = 1; j <= localStorage.getItem("MaxID"); j++) {
-    document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>" 
-    + "<div class='form-group'><input type='text' value='"
-    + localStorage.getItem(j + "-IP") 
-    + "' id='"
-    +(j + "-IP")
-    + "' onfocusout= \"updatedata('"
-    +(j + "-IP")
-    + "')\" "
-    + "placeholder='-' class='form-control input-sm'></div>"
-    + "</td><td class='text-center'>" 
-    + "<div class='form-group'><input type='text' value='"
-    + localStorage.getItem(j + "-port") 
-    + "' id='"
-    +(j + "-port") 
-    + "' onfocusout= \"updatedata('"
-    +(j + "-port")
-    + "')\" "
-    + "' placeholder='-' class='form-control input-sm'></div>"
-    + "</td></tr>";
+    document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>"
+      + "<div class='form-group'><input type='text' value='"
+      + localStorage.getItem(j + "-IP")
+      + "' id='"
+      + (j + "-IP")
+      + "' onfocusout= \"updatedata('"
+      + (j + "-IP")
+      + "')\" "
+      + "placeholder='-' class='form-control input-sm'></div>"
+      + "</td><td class='text-center'>"
+      + "<div class='form-group'><input type='text' value='"
+      + localStorage.getItem(j + "-port")
+      + "' id='"
+      + (j + "-port")
+      + "' onfocusout= \"updatedata('"
+      + (j + "-port")
+      + "')\" "
+      + "' placeholder='-' class='form-control input-sm'></div>"
+      + "</td></tr>";
   }
 
 }
@@ -337,8 +335,8 @@ function list_configuration() {
 }
 
 //This updates the config.csv data when edited
-function updatedata(NAME){
- 
+function updatedata(NAME) {
+
   localStorage.setItem(NAME, document.getElementById(NAME).value);
   //Then write to config.csv file
   if (os.platform() == 'darwin') {
@@ -355,7 +353,7 @@ function updatedata(NAME){
     //Writes the locations of jackets to external file, only the assigned ones
     for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
       if (localStorage.getItem(l + "-IP") != null || localStorage.getItem(l + "-port") != null) {
-          stream.write(l + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
+        stream.write(l + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
       }
     }
 
@@ -571,6 +569,13 @@ class VibrationMotor {
     }
 
   }
+}
+
+function launch_hand_control() {
+  let exec = require('child_process').exec;
+  exec('pip3 install opencv-python mediapipe && python3 ./API/handdetect.py', (error, stdout, stderr) => {
+      //...
+  })
 }
 
 function scan_modules() {
