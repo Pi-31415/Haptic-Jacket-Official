@@ -187,7 +187,15 @@ function render_config_data() {
   document.getElementById("configdata").innerHTML = "";
   var j;
   for (j = 1; j <= localStorage.getItem("MaxID"); j++) {
-    document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>" + localStorage.getItem(j + "-IP") + "</td><td class='text-center'>" + localStorage.getItem(j + "-port") + "</td></tr>";
+    document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>" 
+    + "<div class='form-group'><input type='text' value='"
+    + localStorage.getItem(j + "-IP") 
+    + "' placeholder='-' class='form-control input-sm'></div>"
+    + "</td><td class='text-center'>" 
+    + "<div class='form-group'><input type='text' value='"
+    + localStorage.getItem(j + "-port") 
+    + "' placeholder='-' class='form-control input-sm'></div>"
+    + "</td></tr>";
   }
 
 }
