@@ -133,9 +133,8 @@ with mp_hands.Hands(
             image = cv2.putText(image, text, coordinates, font, fontScale, color, thickness, cv2.LINE_AA)
 
        
-        overlay = cv2.imread('dice.png')
-        added_image = cv2.addWeighted(image,0.4,overlay,0.1,0)
-        cv2.imshow('Haptic Jacket UI Overlay Test', added_image)
+       
+        cv2.imshow('Haptic Jacket UI Overlay Test', image)
 
         if cv2.waitKey(5) & 0xFF == 27:
             break
