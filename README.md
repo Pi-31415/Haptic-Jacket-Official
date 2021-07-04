@@ -45,25 +45,11 @@ npm start
 
 ## Building Commands
 
-Or just run macbuild.sh
+### MacOS Build
 
-```bash
-# Mac Build
-sudo electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/icon.icns --prune=true --out=release-builds
-```
+Just run macbuild.sh
 
-**Note: Copy extraResources into the release-builds folder after building using the following**
-
-```
-sudo cp -R ./extraResources/ ./release-builds/Haptic-Jacket-Controller-darwin-x64
-```
-
-After Building on mac, change permission for the build folder using
-```bash
-sudo chmod -R 777 release-builds
-```
-
-# Ubuntu Build
+### Ubuntu Build
 
 ## First install electron and installer
 
