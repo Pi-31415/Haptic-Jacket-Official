@@ -228,11 +228,13 @@ function toggle_show_table() {
   document.getElementById("btn_hide_config").style.display = "block";
   document.getElementById("btn_show_config").style.display = "none";
   document.getElementById("configtable").style.display = "block";
+  document.getElementById("p5canvas").style.display = "none";
   showing_configuration_data = true;
   document.getElementById("configmessage").innerHTML = "Edit the values you want and save. Configuration file location : ";
 }
 
 function toggle_hide_table() {
+  document.getElementById("p5canvas").style.display = "block";
   document.getElementById("btn_show_config").style.display = "block";
   document.getElementById("btn_hide_config").style.display = "none";
   document.getElementById("configtable").style.display = "none";
