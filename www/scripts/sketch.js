@@ -103,7 +103,7 @@ function setup() {
   document.getElementById("btn_save").style.display = "none";
 
   document.getElementById("configpath").innerHTML = localStorage.getItem("config_file_path");
-  document.getElementById("configmessage").innerHTML = "Edit the values you want and save. Configuration file location : ";
+  document.getElementById("configmessage").innerHTML = "Configuration file location : ";
   document.getElementById("btn_reset").style.display = "none";
   document.getElementById("btn_hide_config").style.display = "none";
   document.getElementById("configtable").style.display = "none";
@@ -223,17 +223,18 @@ function toggle_configure() {
 }
 
 function toggle_show_table() {
-
   render_config_data();
+  show_message('Click and edit the values you want, then save.');
   document.getElementById("btn_hide_config").style.display = "block";
   document.getElementById("btn_show_config").style.display = "none";
   document.getElementById("configtable").style.display = "block";
   document.getElementById("p5canvas").style.display = "none";
   showing_configuration_data = true;
-  document.getElementById("configmessage").innerHTML = "Edit the values you want and save. Configuration file location : ";
+  document.getElementById("configmessage").innerHTML = "Configuration file location : ";
 }
 
 function toggle_hide_table() {
+  show_message('IP data saved.');
   document.getElementById("p5canvas").style.display = "block";
   document.getElementById("btn_show_config").style.display = "block";
   document.getElementById("btn_hide_config").style.display = "none";
