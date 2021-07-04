@@ -572,10 +572,7 @@ class VibrationMotor {
 }
 
 function launch_hand_control() {
-  let exec = require('child_process').exec;
-  exec('pip3 install opencv-python mediapipe && python3 ./API/handdetect.py', (error, stdout, stderr) => {
-      //...
-  })
+
 }
 
 function scan_modules() {
