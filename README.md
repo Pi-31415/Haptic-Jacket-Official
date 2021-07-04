@@ -33,6 +33,8 @@ You can learn more about each of these components within the [Quick Start Guide]
 
 ## Development Commands
 
+Make sure that the node you have is >= 10.0
+
 ```bash
 # Install dependencies
 npm install
@@ -69,6 +71,7 @@ sudo chmod -R 777 release-builds
 npm i --save-dev electron
 
 npm install --save-dev electron-installer-snap
+npm i electron-packager
 ```
 Then place following command in package.json
 ```

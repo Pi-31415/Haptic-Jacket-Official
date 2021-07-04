@@ -1,5 +1,5 @@
-npm install --save-dev electron-installer-snap
-npm i electron-packager
+
+mkdir out
 sudo npm run build:package && npm run build:snap
 sudo cp -r extraResources/* out/Haptic-Jacket-Controller-linux-x64
 sudo chmod -R 777 out
