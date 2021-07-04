@@ -24,7 +24,7 @@ def delay(delay_time):
 def initiate_config():
     # Read the contents of config.csv and read it into dictionary
     # This dictionary is for communicating with physical modules
-    with open('config.csv') as f:
+    with open('../config.csv') as f:
         reader = enumerate(csv.reader(f))
         for i, row in reader:
             # print(i, row)
