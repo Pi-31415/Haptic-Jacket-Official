@@ -42,8 +42,6 @@ npm start
 
 ## Building Commands
 
-IMPORTANT: Uncomment File Path in preload.js before building
-
 
 ```bash
 # Mac Build
@@ -63,9 +61,7 @@ sudo chmod -R 777 release-builds
 
 # Ubuntu Build
 
-IMPORTANT: Uncomment File Path in preload.js before building, and build in sudo mode
-
-# First install electron and installer
+## First install electron and installer
 
 ```
 npm i --save-dev electron
