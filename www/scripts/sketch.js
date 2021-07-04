@@ -330,7 +330,7 @@ function write_locations() {
 
     for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
       if (localStorage.getItem(l + "-x") != null || localStorage.getItem(l + "-y") != null) {
-        console.log(l + "," + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + "," + localStorage.getItem(l + "-port") + "," + localStorage.getItem(l + "-IP") + "\n");
+        console.log(l + "," + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
       }
     }
 
