@@ -49,6 +49,12 @@
     <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="./scripts/p5.min.js"></script>
     <script src="./scripts/sketch.js"></script>
+    <style>
+        #messagebox:hover {
+            color: #fff;
+            cursor: default;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,7 +71,7 @@
                 <li id="btn_configure">
                     <a href="#" onclick="configure()">
                         <span class="fui-gear"></span>
-                        Change Positions
+                        Configure Positions
                     </a>
                 </li>
 
@@ -93,14 +99,14 @@
                 </li>
                 <li id="btn_show_config">
                     <a href="#" onclick="toggle_show_table()">
-                        <span class="fui-eye"></span>
-                        Show Configuration Data
+                        <span class="fui-new"></span>
+                        Configure IP
                     </a>
                 </li>
                 <li id="btn_hide_config">
                     <a href="#" onclick="toggle_hide_table()">
-                        <span class="fui-eye"></span>
-                        Hide Configuration Data
+                        <span class="fui-check"></span>
+                        Save IP Configuration
                     </a>
                 </li>
                 <!--<li>
@@ -115,7 +121,7 @@
 
     <div class="demo-row" id="configtable">
         <div class="demo-content-wide">
-            <p>The following data is read from config.csv file. To edit, please manually edit config.csv at <span id="configpath"></span> file and save, then restart this application.</p>
+            <p><span id="configmessage"></span> <span id="configpath"></span></p>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -133,7 +139,7 @@
         </div> <!-- /tables -->
     </div> <!-- /row -->
 
-    <main>
+    <main id="p5canvas">
 
     </main>
 

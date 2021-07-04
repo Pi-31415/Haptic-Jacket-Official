@@ -58,7 +58,7 @@ var showing_configuration_data = false;
 
 var scan_complete = false;
 let screen_width = 1050;
-let box_boundary_y_coordinate = 450;
+let box_boundary_y_coordinate = 420;
 
 //Check if storage_file exists
 var configuration_storage_exists = false;
@@ -103,7 +103,7 @@ function setup() {
   document.getElementById("btn_save").style.display = "none";
 
   document.getElementById("configpath").innerHTML = localStorage.getItem("config_file_path");
-
+  document.getElementById("configmessage").innerHTML = "Edit the values you want and save. Configuration file location : ";
   document.getElementById("btn_reset").style.display = "none";
   document.getElementById("btn_hide_config").style.display = "none";
   document.getElementById("configtable").style.display = "none";
@@ -113,7 +113,7 @@ function setup() {
 
   //Render initial components
   pixelDensity(3.0);
-  createCanvas(screen_width, 600);
+  createCanvas(screen_width, 550);
   jacket_img = loadImage('img/jacket.svg');
   scan_modules();
 }
@@ -122,7 +122,7 @@ function draw() {
   //Set up scene
   background(255, 255, 255);
   fill(color(150, 150, 150));
-  image(jacket_img, 100, 5, 800, 460);
+  image(jacket_img, 100, 0, 800, 460);
 
   //Check if localstorage exists
   if (localStorage.getItem("1-x") != null) {
@@ -190,10 +190,20 @@ function render_config_data() {
     document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>" 
     + "<div class='form-group'><input type='text' value='"
     + localStorage.getItem(j + "-IP") 
-    + "' placeholder='-' class='form-control input-sm'></div>"
+    + "' id='"
+    +(j + "-IP")
+    + "' onfocusout= \"updatedata('"
+    +(j + "-IP")
+    + "')\" "
+    + "placeholder='-' class='form-control input-sm'></div>"
     + "</td><td class='text-center'>" 
     + "<div class='form-group'><input type='text' value='"
     + localStorage.getItem(j + "-port") 
+    + "' id='"
+    +(j + "-port") 
+    + "' onfocusout= \"updatedata('"
+    +(j + "-port")
+    + "')\" "
     + "' placeholder='-' class='form-control input-sm'></div>"
     + "</td></tr>";
   }
@@ -219,6 +229,7 @@ function toggle_show_table() {
   document.getElementById("btn_show_config").style.display = "none";
   document.getElementById("configtable").style.display = "block";
   showing_configuration_data = true;
+  document.getElementById("configmessage").innerHTML = "Edit the values you want and save. Configuration file location : ";
 }
 
 function toggle_hide_table() {
@@ -271,7 +282,7 @@ function RenderMotors(number_of_motors) {
   var j, k;
   var current_separator_X = 50;
   var current_separator_Y = 50;
-  var currentY = 500;
+  var currentY = box_boundary_y_coordinate + (boxSize * 1.1);
   var currentX = 50;
 
   noFill();
@@ -322,6 +333,37 @@ function list_configuration() {
   }
 }
 
+//This updates the config.csv data when edited
+function updatedata(NAME){
+ 
+  localStorage.setItem(NAME, document.getElementById(NAME).value);
+  //Then write to config.csv file
+  if (os.platform() == 'darwin') {
+    //For MacOS
+    var input_file_path = path.join(__dirname, '../../../../../', 'config.csv');
+  } else if (os.platform() == 'linux') {
+    //For Ubuntu
+    var input_file_path = path.join(__dirname, '../../../', 'config.csv');
+  }
+
+  var stream = fs.createWriteStream(input_file_path);
+  stream.once('open', function (fd) {
+    stream.write("ID,IP,PORT\n");
+    //Writes the locations of jackets to external file, only the assigned ones
+    for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
+      if (localStorage.getItem(l + "-IP") != null || localStorage.getItem(l + "-port") != null) {
+          stream.write(l + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
+      }
+    }
+
+    stream.end();
+  });
+
+  //Display Message
+  document.getElementById("configmessage").innerHTML = "Successfully updated the value " + document.getElementById(NAME).value + " in ";
+  write_locations();
+}
+
 function write_locations() {
 
   if (os.platform() == 'darwin') {
@@ -339,7 +381,7 @@ function write_locations() {
     for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
       if (localStorage.getItem(l + "-x") != null || localStorage.getItem(l + "-y") != null) {
 
-        if (localStorage.getItem(l + "-y") <= 430) {
+        if (localStorage.getItem(l + "-y") <= box_boundary_y_coordinate) {
           stream.write(l + "," + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
         }
 
