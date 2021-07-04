@@ -69,7 +69,6 @@ sudo chmod -R 777 release-builds
 
 ```
 npm i --save-dev electron
-
 npm install --save-dev electron-installer-snap
 npm i electron-packager
 ```
@@ -79,27 +78,9 @@ Then place following command in package.json
  "build:snap": "electron-installer-snap --src=out/myappname-linux-x64"
 ```
 
-```
-# Finally Build
-sudo npm run build:package && npm run build:snap
-```
-**Don't forget to manually copy the config.csv after building using following commands**
+Then run ./ubuntubuild.sh
 
-```
-sudo cp -r extraResources/* out/Haptic-Jacket-Controller-linux-x64
-```
-
-
-After Building on linux, change permission for the build folder using
-```bash
-sudo chmod -R 777 out
-```
-
-Then compress into tar
-```
-cd out
-tar -czvf Haptic-Jacket-Controller-linux-x64.tar.gz Haptic-Jacket-Controller-linux-x64
-```
+Output is in out/Haptic-Jacket-Controller-linux-x64.tar.gz
 
 
 Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
