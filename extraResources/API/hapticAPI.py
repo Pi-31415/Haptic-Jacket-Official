@@ -50,6 +50,24 @@ def show_modules():
     print('\n')
 
 
+def get_x_coordinates():
+    # Get x coordinates
+    X = []
+    for module_id in modules.keys():
+        id = module_id
+        X.append(int(modules[module_id]['X'])+200)
+
+    return X
+
+def get_y_coordinates():
+    # Get y coordinates
+    Y = []
+    for module_id in modules.keys():
+        id = module_id
+        Y.append(int(modules[module_id]['Y'])+200)
+
+    return Y
+
 def send_UDP_message(message, physical_module_ip, physical_module_port, INTENSITY, DURATION):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # Internet  # UDP
     # Send the UDP message to GUI Application first, for visualization

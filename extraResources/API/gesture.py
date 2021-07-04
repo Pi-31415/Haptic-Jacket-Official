@@ -3,14 +3,19 @@
 
 import cv2
 import mediapipe as mp
+import hapticAPI
+
+hapticAPI.initiate_config()
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 mp_selfie_segmentation = mp.solutions.selfie_segmentation
 
 # Location of the Modules, and Jacket Outline
-modules_x = [400,500,600,700,800,350,500,600,700,850,300,500,600,700,900,250,500,600,700,950]
-modules_y = [200,200,200,200,200,300,300,300,300,300,400,400,400,400,400,500,500,500,500,500]
+
+
+modules_x = hapticAPI.get_x_coordinates()
+modules_y = hapticAPI.get_y_coordinates()
 
 # Module Class
 class Module:
@@ -28,6 +33,8 @@ class Module:
                        (0, 0, 255), -1, lineType=cv2.LINE_AA)
             cv2.circle(IMG, (self.x, self.y), self.radius,
                        (255, 255, 255), 3, lineType=cv2.LINE_AA)
+            hapticAPI.activate_motor(self.id, 100, 500)
+
         else:
             cv2.circle(IMG, (self.x, self.y), self.radius,
                        (255, 255, 255), 3, lineType=cv2.LINE_AA)
@@ -113,7 +120,7 @@ with mp_hands.Hands(
 
                 for x in range(len(modules_x)):
                     index = x+1
-                    module.append(Module(index, True, 30, modules_x[x], modules_y[x]))
+                    module.append(Module(index, True, 20, modules_x[x], modules_y[x]))
                     module[x].show(image, x_coordinate, y_coordinate)
                 
         else:
