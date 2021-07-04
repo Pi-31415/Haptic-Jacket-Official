@@ -36,6 +36,7 @@ You can learn more about each of these components within the [Quick Start Guide]
 ```bash
 # Install dependencies
 npm install
+npm i --save-dev electron
 # Run the app
 npm start
 ```
@@ -95,13 +96,6 @@ Then compress into tar
 ```
 cd out
 tar -czvf Haptic-Jacket-Controller-linux-x64.tar.gz Haptic-Jacket-Controller-linux-x64
-```
-
-
-After Building on linux, change permission for the build folder using
-```bash
-cd ..
-sudo chmod -R 777 out
 ```
 
 
