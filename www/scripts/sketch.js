@@ -573,6 +573,8 @@ class VibrationMotor {
 
 function launch_hand_control() {
 
+  var spawn = require("child_process").spawn;
+  var process = spawn('python3', ["./API/handdetect.py"]);
 }
 
 function scan_modules() {
