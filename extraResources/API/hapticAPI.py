@@ -24,13 +24,13 @@ def delay(delay_time):
 def initiate_config():
     # Read the contents of config.csv and read it into dictionary
     # This dictionary is for communicating with physical modules
-    with open('../config.csv') as f:
+    with open('../location.csv') as f:
         reader = enumerate(csv.reader(f))
         for i, row in reader:
             # print(i, row)
             if i != 0:
                 if (len(str(row[1])) >= 1):
-                    current_module = dict({'IP': str(row[1]), 'PORT': int(row[2])})
+                    current_module = dict({'X': float(row[1]), 'Y': float(row[2]),'IP': str(row[3]), 'PORT': int(row[4])})
                     modules[i] = current_module
     print('All modules scanned from config.csv\n')
 
@@ -40,7 +40,9 @@ def show_modules():
     for module_id in modules.keys():
         id = module_id
         print(id, modules[module_id]['IP'],
-              modules[module_id]['PORT'])
+              modules[module_id]['PORT'],
+              modules[module_id]['X'],
+              modules[module_id]['Y'])
     print('\n')
 
 def send_UDP_message(message, physical_module_ip, physical_module_port,INTENSITY,DURATION):
