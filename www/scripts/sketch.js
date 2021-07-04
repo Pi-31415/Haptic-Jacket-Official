@@ -397,7 +397,6 @@ function write_locations() {
 function save_configuration() {
   current_dragged_module = 0;
   configuration_mode_on = false;
-  list_configuration();
   write_locations();
   show_message('Your configurations are saved.');
   toggle_configure();
