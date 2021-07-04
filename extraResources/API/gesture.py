@@ -25,7 +25,7 @@ class Module:
         self.radius = radius
         self.x = x
         self.y = y
-        self.tolerance = 50
+        self.tolerance = 20
 
     def show(self, IMG, finger_x, finger_y): #Visualizes the Haptic Module on Camera
         if(int(abs(self.x-finger_x)) <= self.tolerance and int(abs(self.y-finger_y)) <= self.tolerance):
@@ -33,7 +33,7 @@ class Module:
                        (0, 0, 255), -1, lineType=cv2.LINE_AA)
             cv2.circle(IMG, (self.x, self.y), self.radius,
                        (255, 255, 255), 3, lineType=cv2.LINE_AA)
-            hapticAPI.activate_motor(self.id, 100, 500)
+            hapticAPI.activate_motor(self.id, 100, 100)
 
         else:
             cv2.circle(IMG, (self.x, self.y), self.radius,

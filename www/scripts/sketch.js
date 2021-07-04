@@ -103,7 +103,7 @@ function setup() {
   document.getElementById("btn_save").style.display = "none";
 
   document.getElementById("configpath").innerHTML = localStorage.getItem("config_file_path");
-  document.getElementById("configmessage").innerHTML = "Configuration file location : ";
+  document.getElementById("configmessage").innerHTML = "Only the IP of modules on the jacket can be configured.  <br> Configuration file location : ";
   document.getElementById("btn_reset").style.display = "none";
   document.getElementById("btn_hide_config").style.display = "none";
   document.getElementById("configtable").style.display = "none";
@@ -185,25 +185,31 @@ function render_config_data() {
   document.getElementById("configdata").innerHTML = "";
   var j;
   for (j = 1; j <= localStorage.getItem("MaxID"); j++) {
-    document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>"
-      + "<div class='form-group'><input type='text' value='"
-      + localStorage.getItem(j + "-IP")
-      + "' id='"
-      + (j + "-IP")
-      + "' onfocusout= \"updatedata('"
-      + (j + "-IP")
-      + "')\" "
-      + "placeholder='-' class='form-control input-sm'></div>"
-      + "</td><td class='text-center'>"
-      + "<div class='form-group'><input type='text' value='"
-      + localStorage.getItem(j + "-port")
-      + "' id='"
-      + (j + "-port")
-      + "' onfocusout= \"updatedata('"
-      + (j + "-port")
-      + "')\" "
-      + "' placeholder='-' class='form-control input-sm'></div>"
-      + "</td></tr>";
+
+
+    if (localStorage.getItem(j + "-y") <= box_boundary_y_coordinate) {
+      document.getElementById("configdata").innerHTML += "<tr><td class='text-center'>" + j + "</td><td class='text-center'>"
+        + "<div class='form-group'><input type='text' value='"
+        + localStorage.getItem(j + "-IP")
+        + "' id='"
+        + (j + "-IP")
+        + "' onfocusout= \"updatedata('"
+        + (j + "-IP")
+        + "')\" "
+        + "placeholder='-' class='form-control input-sm'></div>"
+        + "</td><td class='text-center'>"
+        + "<div class='form-group'><input type='text' value='"
+        + localStorage.getItem(j + "-port")
+        + "' id='"
+        + (j + "-port")
+        + "' onfocusout= \"updatedata('"
+        + (j + "-port")
+        + "')\" "
+        + "' placeholder='-' class='form-control input-sm'></div>"
+        + "</td></tr>";
+    }
+
+
   }
 
 }
@@ -228,7 +234,7 @@ function toggle_show_table() {
   document.getElementById("configtable").style.display = "block";
   document.getElementById("p5canvas").style.display = "none";
   showing_configuration_data = true;
-  document.getElementById("configmessage").innerHTML = "Configuration file location : ";
+  document.getElementById("configmessage").innerHTML = "Only the IP of modules on the jacket can be configured.  <br> Configuration file location : ";
 }
 
 function toggle_hide_table() {
@@ -311,7 +317,7 @@ function RenderMotors(number_of_motors) {
 }
 
 function show_help() {
-  show_message("First scan modules. Then configure the positions. Hover with mouse to activate.");
+  show_message("Configure Positions. Then Configure IP. Hover to activate.");
 }
 
 function configure() {
