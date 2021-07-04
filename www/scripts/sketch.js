@@ -12,6 +12,7 @@ var HOST = '127.0.0.1';
 const fs = require('fs');
 var dgram = require('dgram');
 var path = require('path');
+var os = require('os');
 var server = dgram.createSocket('udp4');
 
 var delay_times = [];
@@ -313,18 +314,28 @@ function list_configuration() {
   }
 }
 
-function save_configuration() {
-  current_dragged_module = 0;
-  configuration_mode_on = false;
-  list_configuration();
+function write_locations() {
 
-  var input_file_path = path.join(__dirname, './', 'locations.csv');
+  if (os.platform() == 'darwin') {
+    //For MacOS
+    var input_file_path = path.join(__dirname, '../../../../../', 'location.csv');
+  } else if (os.platform() == 'linux') {
+    //For Ubuntu
+    var input_file_path = path.join(__dirname, '../../../', 'location.csv');
+  }
+
   var stream = fs.createWriteStream(input_file_path);
   stream.once('open', function (fd) {
     stream.write("LOCATION\n");
     stream.end();
   });
+}
 
+function save_configuration() {
+  current_dragged_module = 0;
+  configuration_mode_on = false;
+  list_configuration();
+  write_locations();
   show_message('Your configurations are saved.');
   toggle_configure();
 }

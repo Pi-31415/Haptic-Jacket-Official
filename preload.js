@@ -1,15 +1,20 @@
 // All of the Node.js APIs are available in the preload process.
 const { count } = require('console');
 var fs = require('fs');
+var os = require('os');
 var path = require('path');
 const csv = require('csv-parser');
 var counter = 1;
 
-//For MacOS
-var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
 
-//For Ubuntu
-//var input_file_path = path.join(__dirname, '../../', 'config.csv');
+if (os.platform() == 'darwin') {
+  //For MacOS
+  var input_file_path = path.join(__dirname, '../../../../', 'config.csv');
+} else if (os.platform() == 'linux') {
+  //For Ubuntu
+  var input_file_path = path.join(__dirname, '../../', 'config.csv');
+}
+
 
 localStorage.setItem("config_file_path", input_file_path);
 
