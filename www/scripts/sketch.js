@@ -9,8 +9,9 @@
 var PORT = 33333;
 var UDP_motorid = [];
 var HOST = '127.0.0.1';
-
+const fs = require('fs');
 var dgram = require('dgram');
+var path = require('path');
 var server = dgram.createSocket('udp4');
 
 var delay_times = [];
@@ -303,13 +304,6 @@ function configure() {
   }
 }
 
-function save_configuration() {
-  current_dragged_module = 0;
-  configuration_mode_on = false;
-  show_message('Your configurations are saved.');
-  toggle_configure();
-}
-
 //List all configurations
 function list_configuration() {
   for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
@@ -318,6 +312,24 @@ function list_configuration() {
     }
   }
 }
+
+function save_configuration() {
+  current_dragged_module = 0;
+  configuration_mode_on = false;
+  list_configuration();
+
+  var input_file_path = path.join(__dirname, './', 'locations.csv');
+  var stream = fs.createWriteStream(input_file_path);
+  stream.once('open', function (fd) {
+    stream.write("LOCATION\n");
+    stream.end();
+  });
+
+  show_message('Your configurations are saved.');
+  toggle_configure();
+}
+
+
 
 //Clear all configurations, and reset motor locations for reset button
 function clear_configuration() {
