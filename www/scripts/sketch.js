@@ -330,7 +330,11 @@ function write_locations() {
     //Writes the locations of jackets to external file, only the assigned ones
     for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
       if (localStorage.getItem(l + "-x") != null || localStorage.getItem(l + "-y") != null) {
-        stream.write(l + "," + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
+
+        if (localStorage.getItem(l + "-y") <= 430) {
+          stream.write(l + "," + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
+        }
+
       }
     }
 
