@@ -69,7 +69,7 @@ let IP = [];
 //Configuration Motor Dummy
 let bx;
 let by;
-let boxSize = 20;
+let boxSize = 35;
 let overBox = false;
 let locked = false;
 let xOffset = 0.0;
@@ -352,7 +352,7 @@ class VibrationMotor {
     this.y = Y;
     this.init_x = X;
     this.init_y = Y;
-    this.diameter = 35;
+    this.diameter = boxSize;
     this.speed = 2;
     this.max_pixel_vibration_animation = 3;
     this.sensitivity = 1;
