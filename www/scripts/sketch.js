@@ -327,10 +327,10 @@ function write_locations() {
   var stream = fs.createWriteStream(input_file_path);
   stream.once('open', function (fd) {
     stream.write("ID,X,Y,IP,PORT\n");
-
+    //Writes the locations of jackets to external file
     for (var l = 1; l <= localStorage.getItem("MaxID"); l++) {
       if (localStorage.getItem(l + "-x") != null || localStorage.getItem(l + "-y") != null) {
-        console.log(l + "," + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
+        stream.write(l + "," + localStorage.getItem(l + "-x") + "," + localStorage.getItem(l + "-y") + "," + localStorage.getItem(l + "-IP") + "," + localStorage.getItem(l + "-port") + "\n");
       }
     }
 
