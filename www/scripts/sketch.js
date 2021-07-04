@@ -412,7 +412,7 @@ function clear_configuration() {
   var j, k;
   var current_separator_X = 50;
   var current_separator_Y = 50;
-  var currentY = 500;
+  var currentY = box_boundary_y_coordinate + (boxSize * 1.1);
   var currentX = 50;
   for (j = 1; j <= 4; j++) {
     for (k = 1; k <= 20; k++) {
@@ -427,7 +427,7 @@ function clear_configuration() {
     currentY += current_separator_Y;
   }
 
-  show_message('All configuration data cleared.');
+  show_message('Locations have been reset.');
   toggle_configure();
 }
 
