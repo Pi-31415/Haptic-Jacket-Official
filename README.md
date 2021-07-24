@@ -41,25 +41,21 @@ npm i --save-dev electron
 npm start
 ```
 
-## Building Commands
+# Building Commands
 
-### MacOS Build
+## MacOS Build
 
 Just run macbuild.sh
 
-### Ubuntu Build
 
-## First install electron and installer
+## Ubuntu Build
+
+**First install electron and installer by running**
 
 ```
 npm i --save-dev electron
 npm install --save-dev electron-installer-snap
 npm i electron-packager
-```
-Then place following command in package.json
-```
- "build:package": "electron-packager . --out=out",
- "build:snap": "electron-installer-snap --src=out/myappname-linux-x64"
 ```
 
 Then run ./ubuntubuild.sh
