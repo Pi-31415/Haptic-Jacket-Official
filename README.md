@@ -1,13 +1,16 @@
 # Haptic Jacket Middleware Official Repository
 
+![Image of Version](https://img.shields.io/badge/version-v1.0-green)
+![Image of Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)
+
 This is the official repository for the haptic jacket middleware for my research project.
 
 Documentation [on Gitbook](https://pi31415.gitbook.io/haptic-jacket/)
 
+![Image of Demonstration](api.gif)
+
 ### Related Repositories
 
-- [UDP-Client-Server-Test](https://github.com/Pi-31415/UDP-Client-Server-Test)
-- [Haptic-Jacket-API-GUI](https://github.com/Pi-31415/Haptic-Jacket-API-GUI)
 - [Flutter-UDP-Client-Android](https://github.com/Pi-31415/Flutter-UDP-Client-Android)
 
 ## Requirements
@@ -43,25 +46,21 @@ npm i --save-dev electron
 npm start
 ```
 
-## Building Commands
+# Building Commands
 
-### MacOS Build
+## MacOS Build
 
 Just run macbuild.sh
 
-### Ubuntu Build
 
-## First install electron and installer
+## Ubuntu Build
+
+**First install electron and installer by running**
 
 ```
 npm i --save-dev electron
 npm install --save-dev electron-installer-snap
 npm i electron-packager
-```
-Then place following command in package.json
-```
- "build:package": "electron-packager . --out=out",
- "build:snap": "electron-installer-snap --src=out/myappname-linux-x64"
 ```
 
 Then run ./ubuntubuild.sh
@@ -87,4 +86,4 @@ sass --watch www/styles/flat-ui-pro.scss:www/css/flat-ui-pro.css
 
  ## Running Middleware
 
- For Programmers, the Haptic Jacket GUI app can be invoked through a python API. Run the file in middleware folder.
+ For Programmers, the Haptic Jacket GUI app can be invoked through a python API. Run the file in extraResources/API folder.
