@@ -6,8 +6,6 @@ Documentation [on Gitbook](https://pi31415.gitbook.io/haptic-jacket/)
 
 ### Related Repositories
 
-- [UDP-Client-Server-Test](https://github.com/Pi-31415/UDP-Client-Server-Test)
-- [Haptic-Jacket-API-GUI](https://github.com/Pi-31415/Haptic-Jacket-API-GUI)
 - [Flutter-UDP-Client-Android](https://github.com/Pi-31415/Flutter-UDP-Client-Android)
 
 ## Requirements
@@ -87,4 +85,4 @@ sass --watch www/styles/flat-ui-pro.scss:www/css/flat-ui-pro.css
 
  ## Running Middleware
 
- For Programmers, the Haptic Jacket GUI app can be invoked through a python API. Run the file in middleware folder.
+ For Programmers, the Haptic Jacket GUI app can be invoked through a python API. Run the file in extraResources/API folder.
