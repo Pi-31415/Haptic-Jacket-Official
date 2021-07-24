@@ -1,8 +1,13 @@
 # Haptic Jacket Middleware Official Repository
 
+![Image of Version](https://img.shields.io/badge/version-v1.0-green)
+![Image of Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)
+
 This is the official repository for the haptic jacket middleware for my research project.
 
 Documentation [on Gitbook](https://pi31415.gitbook.io/haptic-jacket/)
+
+![Image of Demonstration](api.gif)
 
 ### Related Repositories
 
