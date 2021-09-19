@@ -1,5 +1,5 @@
 # Haptic Jacket Middleware Official Repository
-
+.
 ![Image of Version](https://img.shields.io/badge/version-v1.0-green)
 ![Image of Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)
 
