@@ -72,7 +72,7 @@ function UDP_send(MESSAGE, PORT, HOST) {
       client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
         if (err) throw err;
         console.log(millis_elapsed);
-        //console.log('UDP message ' + MESSAGE + " - " + udp_counter + ' sent to ' + HOST + ':' + PORT);
+        console.log('UDP message ' + MESSAGE + " - " + udp_counter + ' sent to ' + HOST + ':' + PORT);
         client.close();
       });
 
