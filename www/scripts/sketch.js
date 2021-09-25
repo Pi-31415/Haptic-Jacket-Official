@@ -1,6 +1,6 @@
 /*-------------------------------------------------*/
 /* Author : Pi */
-/* Date: Feb 26, 2021. */
+/* Date: Sep 25, 2021. */
 /* Description:  This is the GUI visualization for the Haptic Jacket controller middleware */
 /* Dependencies : node, materialize and p5.js*/
 /*-------------------------------------------------*/
@@ -15,14 +15,11 @@ var path = require('path');
 var os = require('os');
 var server = dgram.createSocket('udp4');
 
-//for converting to milliseconds
-var udp_counter = 0;
-var old_millis = 0;
-var new_millis = 0;
-var millis_captured = false;
-
 var delay_times = [];
 var intensities = [];
+var current_millis = 0;
+var discrete_delay_time = 40; //Milliseconds for discrete time
+var time_to_send = false;
 
 function UDP_bind() {
   server.on('listening', function () {
@@ -48,18 +45,15 @@ function UDP_bind() {
 }
 
 function UDP_send(MESSAGE, PORT, HOST) {
-
-  if (MESSAGE == '1') {
-
-    var message = new Buffer.from(MESSAGE.toString());
+  if (MESSAGE == '1' && time_to_send == true) {
+    //var message = new Buffer.from(MESSAGE.toString());
+    var message = new Buffer.from(discrete_delay_time.toString());
     var client = dgram.createSocket('udp4');
     client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
       if (err) throw err;
-      console.log('UDP message ' + MESSAGE + 'sent to ' + HOST + ':' + PORT);
+      console.log(' : UDP message ' + message + ' sent to ' + HOST + ':' + PORT);
       client.close();
     });
-
-
   }
 }
 
@@ -131,6 +125,17 @@ function setup() {
 }
 
 function draw() {
+
+  current_millis = parseInt(millis());
+
+  //Use 5 as a tolerance (to check the closeness to delay time).
+  if(current_millis % discrete_delay_time <= 10){
+    time_to_send = true;
+  }else{
+    time_to_send = false;
+  }
+  //console.log(current_millis);
+
   //Set up scene
   background(255, 255, 255);
   fill(color(150, 150, 150));
