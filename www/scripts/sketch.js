@@ -49,38 +49,18 @@ function UDP_bind() {
 
 function UDP_send(MESSAGE, PORT, HOST) {
 
-  //Millisecond Conversion
-  if (MESSAGE == '1' && udp_counter == 1) {
-    millis_captured = false;
-    old_millis = millis();
-    //console.log('Old millis =' + old_millis);
+  if (MESSAGE == '1') {
+
+    var message = new Buffer.from(MESSAGE.toString());
+    var client = dgram.createSocket('udp4');
+    client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
+      if (err) throw err;
+      console.log('UDP message ' + MESSAGE + 'sent to ' + HOST + ':' + PORT);
+      client.close();
+    });
+
+
   }
-
-  //Reset UDP counter
-  if (MESSAGE == '0') {
-    udp_counter = 0;
-
-    if (millis_captured != true) {
-      new_millis = millis();
-      //console.log('Total Millis =' + (new_millis - old_millis));
-      millis_captured = true;
-
-      var millis_elapsed = Math.floor(new_millis - old_millis);
-
-      var message = new Buffer.from(millis_elapsed.toString());
-      var client = dgram.createSocket('udp4');
-      client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
-        if (err) throw err;
-        console.log(millis_elapsed);
-        console.log('UDP message ' + MESSAGE + " - " + udp_counter + ' sent to ' + HOST + ':' + PORT);
-        client.close();
-      });
-
-    }
-  }
-
-
-  udp_counter++;
 }
 
 // GUI related variables
