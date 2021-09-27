@@ -49,6 +49,7 @@ function UDP_send(MESSAGE, PORT, HOST) {
     //var message = new Buffer.from(MESSAGE.toString());
     var message = new Buffer.from(discrete_delay_time.toString());
     var client = dgram.createSocket('udp4');
+    alert(typeof(message));
     client.send(message, 0, message.length, PORT, HOST, function (err, bytes) {
       if (err) throw err;
       console.log(' : UDP message ' + message + ' sent to ' + HOST + ':' + PORT);
