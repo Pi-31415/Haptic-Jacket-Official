@@ -1,5 +1,7 @@
 # Haptic Jacket Middleware Official Repository
 
+To download the built binaries, go to the [releases page](https://github.com/Pi-31415/Haptic-Jacket-Official/releases/tag/release).
+
 .
 ![Image of Version](https://img.shields.io/badge/version-v1.0-green)
 ![Image of Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)
