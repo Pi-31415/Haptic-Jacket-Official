@@ -441,6 +441,8 @@ function write_locations() {
   } else if (os.platform() == "linux") {
     //For Ubuntu
     var input_file_path = path.join(__dirname, "../../../", "location.csv");
+  } else {
+    var input_file_path = path.join(__dirname, "./", "config.csv");
   }
 
   var stream = fs.createWriteStream(input_file_path);
