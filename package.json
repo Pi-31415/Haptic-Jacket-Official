@@ -17,15 +17,10 @@
   "author": "Pi Ko",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^11.4.9",
-    "electron-installer-snap": "^5.1.0",
-    "electron-packager": "^15.2.0"
+    "electron": "^7.0.0"
   },
   "dependencies": {
     "csv": "^5.5.0",
     "csv-parser": "^3.0.0"
-  },
-  "devDependencies": {
-    "electron": "7.0.0"
   }
 }
