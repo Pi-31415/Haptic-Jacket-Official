@@ -1,4 +1,5 @@
 # Haptic Jacket Middleware Official Repository
+
 .
 ![Image of Version](https://img.shields.io/badge/version-v1.0-green)
 ![Image of Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)
@@ -48,10 +49,29 @@ npm start
 
 # Building Commands
 
+## Windows Build
+
+First get electron installer
+
+```
+npm install -g electron-builder
+```
+
+Then set up policy (change username)
+
+```
+powershell -ExecutionPolicy Bypass -File C:\Users\97156\AppData\Roaming\npm\electron-builder.ps1
+```
+
+Then build with
+
+```
+electron-builder --win
+```
+
 ## MacOS Build
 
 Just run macbuild.sh
-
 
 ## Ubuntu Build
 
@@ -67,23 +87,22 @@ Then run ./ubuntubuild.sh
 
 Output is in out/Haptic-Jacket-Controller-linux-x64.tar.gz
 
-
 Ubuntu build uses [electron-installer-snap](https://github.com/electron-userland/electron-installer-snap)
 
 ## Editing Style
 
- To compile scss, run
+To compile scss, run
 
- ```
+```
 sass --watch www/styles/flat-ui-pro.scss:www/css/flat-ui-pro.css
- ```
+```
 
- Install sass if not available by running 
+Install sass if not available by running
 
- ```
- sudo npm install -g sass
- ```
+```
+sudo npm install -g sass
+```
 
- ## Running Middleware
+## Running Middleware
 
- For Programmers, the Haptic Jacket GUI app can be invoked through a python API. Run the file in extraResources/API folder.
+For Programmers, the Haptic Jacket GUI app can be invoked through a python API. Run the file in extraResources/API folder.
