@@ -13,7 +13,7 @@ if (os.platform() == "darwin") {
   //For Ubuntu
   var input_file_path = path.join(__dirname, "../../", "config.csv");
 } else {
-  var input_file_path = path.join(__dirname, "../../../../", "config.csv");
+  var input_file_path = path.join(__dirname, "./", "config.csv");
 }
 
 localStorage.setItem("config_file_path", input_file_path);
@@ -55,30 +55,30 @@ window.addEventListener("DOMContentLoaded", () => {
     var stream = fs.createWriteStream(input_file_path);
     stream.once("open", function (fd) {
       stream.write("ID,IP,PORT\n");
-      stream.write("1,221.0.3.201,7777\n");
-      stream.write("2,221.0.3.202,7777\n");
-      stream.write("3,221.0.3.203,7777\n");
-      stream.write("4,221.0.3.204,7777\n");
-      stream.write("5,221.0.3.205,7777\n");
-      stream.write("6,221.0.3.206,7777\n");
-      stream.write("7,221.0.3.207,7777\n");
-      stream.write("8,221.0.3.208,7777\n");
-      stream.write("9,221.0.3.209,7777\n");
-      stream.write("10,221.0.3.210,7777\n");
-      stream.write("11,221.0.3.211,7777\n");
-      stream.write("12,221.0.3.212,7777\n");
-      stream.write("13,221.0.3.213,7777\n");
-      stream.write("14,221.0.3.214,7777\n");
-      stream.write("15,221.0.3.215,7777\n");
-      stream.write("16,221.0.3.216,7777\n");
-      stream.write("17,221.0.3.217,7777\n");
-      stream.write("18,221.0.3.218,7777\n");
-      stream.write("19,221.0.3.219,7777\n");
-      stream.write("20,221.0.3.220,7777\n");
-      stream.write("21,221.0.3.221,7777\n");
-      stream.write("22,221.0.3.222,7777\n");
-      stream.write("23,221.0.3.223,7777\n");
-      stream.write("24,221.0.3.224,7777\n");
+      stream.write("1,192.168.1.201,4210\n");
+      stream.write("2,192.168.1.202,4210\n");
+      stream.write("3,192.168.1.203,4210\n");
+      stream.write("4,192.168.1.204,4210\n");
+      stream.write("5,192.168.1.205,4210\n");
+      stream.write("6,192.168.1.206,4210\n");
+      stream.write("7,192.168.1.207,4210\n");
+      stream.write("8,192.168.1.208,4210\n");
+      stream.write("9,192.168.1.209,4210\n");
+      stream.write("10,192.168.1.210,4210\n");
+      stream.write("11,192.168.1.211,4210\n");
+      stream.write("12,192.168.1.212,4210\n");
+      stream.write("13,192.168.1.213,4210\n");
+      stream.write("14,192.168.1.214,4210\n");
+      stream.write("15,192.168.1.215,4210\n");
+      stream.write("16,192.168.1.216,4210\n");
+      stream.write("17,192.168.1.217,4210\n");
+      stream.write("18,192.168.1.218,4210\n");
+      stream.write("19,192.168.1.219,4210\n");
+      stream.write("20,192.168.1.220,4210\n");
+      stream.write("21,192.168.1.221,4210\n");
+      stream.write("22,192.168.1.222,4210\n");
+      stream.write("23,192.168.1.223,4210\n");
+      stream.write("24,192.168.1.87,4210\n");
       stream.write("25,221.0.3.225,7777\n");
       stream.write("26,221.0.3.226,7777\n");
       stream.write("27,221.0.3.227,7777\n");
