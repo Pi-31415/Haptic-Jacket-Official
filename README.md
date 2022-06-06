@@ -71,6 +71,12 @@ electron-builder --win
 
 ## MacOS Build
 
+First get
+
+```
+npm i -g electron-packager
+```
+
 Just run macbuild.sh
 
 ## Ubuntu Build
@@ -80,7 +86,7 @@ Just run macbuild.sh
 ```
 npm i --save-dev electron
 npm install --save-dev electron-installer-snap
-npm i electron-packager
+npm i -g electron-packager
 ```
 
 Then run ./ubuntubuild.sh

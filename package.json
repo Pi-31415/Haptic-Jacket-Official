@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "csv": "^5.5.0",
-    "csv-parser": "^3.0.0"
+    "csv-parser": "^3.0.0",
+    "electron-packager": "^15.5.1"
   }
 }
