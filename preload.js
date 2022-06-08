@@ -13,7 +13,7 @@ if (os.platform() == "darwin") {
   //For Ubuntu
   var input_file_path = path.join(__dirname, "../../", "config.csv");
 } else {
-  var input_file_path = path.join(__dirname, "./", "config.csv");
+  var input_file_path = path.join(__dirname, "../", "config.csv");
 }
 
 localStorage.setItem("config_file_path", input_file_path);

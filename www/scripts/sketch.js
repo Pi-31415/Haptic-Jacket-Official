@@ -396,7 +396,7 @@ function updatedata(NAME) {
     //For Ubuntu
     var input_file_path = path.join(__dirname, "../../../", "config.csv");
   } else {
-    var input_file_path = path.join(__dirname, "./", "config.csv");
+    var input_file_path = path.join(__dirname, "../", "config.csv");
   }
 
   var stream = fs.createWriteStream(input_file_path);
@@ -442,7 +442,7 @@ function write_locations() {
     //For Ubuntu
     var input_file_path = path.join(__dirname, "../../../", "location.csv");
   } else {
-    var input_file_path = path.join(__dirname, "./", "config.csv");
+    var input_file_path = path.join(__dirname, "../", "config.csv");
   }
 
   var stream = fs.createWriteStream(input_file_path);
@@ -669,7 +669,11 @@ function scan_modules() {
     document.getElementById("btn_configure").style.display = "block";
     scan_complete = true;
     if (localStorage.getItem("MaxID") == null) {
-      alert("Configuration CSV file not found.");
+      alert(
+        "Configuration CSV file not found at " +
+          localStorage.getItem("config_file_path") +
+          "."
+      );
       htmlmessage = "Error: Configuration CSV file not found.";
     } else {
       htmlmessage = localStorage.getItem("MaxID") + " Modules loaded.";

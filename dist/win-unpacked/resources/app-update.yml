@@ -1,0 +1,4 @@
+owner: Pi-31415
+repo: Haptic-Jacket-Official
+provider: github
+updaterCacheDirName: haptic-jacket-controller-updater
